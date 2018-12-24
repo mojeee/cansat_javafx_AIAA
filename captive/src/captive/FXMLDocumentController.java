@@ -546,13 +546,7 @@ public class FXMLDocumentController implements Initializable {
         tileBuilder.smoothing(true);
         mapTile = tileBuilder.build();
         mainGrid.add(mapTile, 0, 1);
-        mainGrid.setBackground(new Background(new BackgroundImage(
-                new Image("captive/shemale.png"),
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.DEFAULT,
-                new BackgroundSize(100, 100, true, true, false, true)
-        )));
+
 
         //alfa
         aof = GaugeBuilder
