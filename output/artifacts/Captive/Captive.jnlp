@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="Captive.jnlp">
+  <information>
+    <title>Helix</title>
+    <vendor>Unknown</vendor>
+    <description>Captive</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="Captive.jar" size="284137" download="eager" />
+    <jar href="Enzo-0.3.6.jar" size="2504009" download="eager" />
+    <jar href="Medusa-7.9.jar" size="1464796" download="eager" />
+    <jar href="SteelSeries-3.9.30.jar" size="595464" download="eager" />
+    <jar href="jSerialComm-2.4.0.jar" size="382652" download="eager" />
+    <jar href="tilesfx-1.4.6.jar" size="1308967" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="1200" height="600" main-class="captive.Captive"  name="Captive" />
+  <update check="background"/>
+</jnlp>

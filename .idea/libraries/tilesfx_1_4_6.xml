@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="tilesfx-1.4.6">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/eu/hansolo/tilesfx/1.4.6/tilesfx-1.4.6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,28 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="Captive">
+    <output-path>$PROJECT_DIR$/output/artifacts/Captive</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="captive.Captive" />
+        <option name="description" value="" />
+        <option name="height" value="600" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="title" value="Helix" />
+        <option name="vendor" value="" />
+        <option name="version" value="3.1" />
+        <option name="width" value="1200" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="Captive.jar">
+        <element id="module-output" name="Captive" />
+        <element id="library" level="project" name="SteelSeries-3.9.30" />
+        <element id="library" level="project" name="Medusa-7.9" />
+        <element id="library" level="project" name="libraries" />
+        <element id="library" level="project" name="tilesfx-1.4.6" />
+        <element id="library" level="project" name="jSerialComm-2.4.0" />
+        <element id="library" level="project" name="Enzo-0.3.6" />
+      </element>
+    </root>
+  </artifact>
+</component>
