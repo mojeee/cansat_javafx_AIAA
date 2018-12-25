@@ -7,7 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d00e933e-b0c8-4297-ba0d-250282ba94a5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/captive/src/captive/FXMLDocument.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/captive/src/captive/FXMLDocument.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/captive/src/captive/FXMLDocumentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/captive/src/captive/FXMLDocumentController.java" afterDir="false" />
     </list>
@@ -52,11 +51,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/captive/src/captive/FXMLDocumentController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="608" column="9" lean-forward="true" selection-start-line="608" selection-start-column="9" selection-end-line="608" selection-end-column="9" />
+            <state relative-caret-position="161">
+              <caret line="865" column="29" lean-forward="true" selection-start-line="865" selection-start-column="29" selection-end-line="865" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -73,12 +72,12 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/captive/src/captive/FXMLDocument.fxml">
           <provider editor-type-id="JavaFX-Scene-Builder" />
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
-              <caret line="102" lean-forward="true" selection-start-line="102" selection-end-line="102" />
+              <caret line="71" column="16" selection-start-line="71" selection-start-column="16" selection-end-line="71" selection-end-column="16" />
               <folding>
                 <element signature="n#columnConstraints#0;n#GridPane#0;n#children#0;n#AnchorPane#0;n#!!top" />
                 <element signature="n#rowConstraints#0;n#GridPane#0;n#children#0;n#AnchorPane#0;n#!!top" />
@@ -119,6 +118,10 @@
       <find>rol</find>
       <find>he</find>
       <find>elevator</find>
+      <find>toprightbottomr</find>
+      <find>ground</find>
+      <find>toprighttop</find>
+      <find>air</find>
     </findStrings>
     <replaceStrings>
       <replace>\\</replace>
@@ -133,8 +136,8 @@
         <option value="$PROJECT_DIR$/captive/src/captive/styles.css" />
         <option value="$PROJECT_DIR$/captive/src/captive/Captive.java" />
         <option value="$PROJECT_DIR$/captive/src/captive/horizon.css" />
-        <option value="$PROJECT_DIR$/captive/src/captive/FXMLDocumentController.java" />
         <option value="$PROJECT_DIR$/captive/src/captive/FXMLDocument.fxml" />
+        <option value="$PROJECT_DIR$/captive/src/captive/FXMLDocumentController.java" />
       </list>
     </option>
   </component>
@@ -234,6 +237,14 @@
       <option name="presentableId" value="Default" />
       <updated>1545560236208</updated>
     </task>
+    <task id="LOCAL-00001" summary="Update some bottom and features">
+      <created>1545734087335</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1545734087335</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -267,6 +278,10 @@
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Update some bottom and features" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update some bottom and features" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/captive/src/captive/FXMLDocument_1.fxml">
@@ -352,24 +367,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/captive/src/captive/FXMLDocumentController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="608" column="9" lean-forward="true" selection-start-line="608" selection-start-column="9" selection-end-line="608" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/captive/src/captive/FXMLDocument.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="102" lean-forward="true" selection-start-line="102" selection-end-line="102" />
+          <caret line="71" column="16" selection-start-line="71" selection-start-column="16" selection-end-line="71" selection-end-column="16" />
           <folding>
             <element signature="n#columnConstraints#0;n#GridPane#0;n#children#0;n#AnchorPane#0;n#!!top" />
             <element signature="n#rowConstraints#0;n#GridPane#0;n#children#0;n#AnchorPane#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/captive/src/captive/FXMLDocumentController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="865" column="29" lean-forward="true" selection-start-line="865" selection-start-column="29" selection-end-line="865" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

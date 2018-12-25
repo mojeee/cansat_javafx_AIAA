@@ -495,7 +495,7 @@ public class FXMLDocumentController implements Initializable {
         topLeftTopRightGrid.add(headingLCD, 0, 2);
 
         //Ground Speed
-        gSpeed = GaugeBuilder
+  /*      gSpeed = GaugeBuilder
                 .create()
                 .skinType(Gauge.SkinType.MODERN)
                 // Related to Title Text
@@ -507,9 +507,9 @@ public class FXMLDocumentController implements Initializable {
                 .animationDuration(500) // Speed of the needle in milliseconds (10 - 10000 ms)
                 .build();
         topRightTopLeftGrid.add(gSpeed, 1, 0);
-
+*/
         //AirSpeed
-        airSpeed = GaugeBuilder
+  /*      airSpeed = GaugeBuilder
                 .create()
                 .skinType(Gauge.SkinType.MODERN)
                 // Related to Title Text
@@ -522,7 +522,7 @@ public class FXMLDocumentController implements Initializable {
                 .animationDuration(500) // Speed of the needle in milliseconds (10 - 10000 ms)
                 .build();
         topRightTopLeftGrid.add(airSpeed, 0, 0);
-
+*/
 
         //GPSSats
         GPSSats = GaugeBuilder
@@ -837,38 +837,40 @@ public class FXMLDocumentController implements Initializable {
         bottomRightTopLeftGrid.add(force4LCD, 1, 1);
 
         airSpeedLCD = LcdBuilder.create()
-                .title("Airspeed (m/s)")
-                .styleClass(Lcd.STYLE_CLASS_FLAT_WET_ASPHALT)
+                .title("Airspeed")
+                .styleClass(Lcd.STYLE_CLASS_FLAT_POMEGRANATE)
                 .decimals(3)
                 .backgroundVisible(true)
                 .value(0.0)
+                .unit("m/s")
                 .maxMeasuredValueDecimals(3)
                 .minValue(0)
                 .maxValue(99)
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.ELEKTRA)
+                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
         topRightTopLeftGrid.add(airSpeedLCD, 0, 1);
 
 
         GPSSpeedLCD = LcdBuilder.create()
-                .title("Ground Speed (m/s)")
-                .styleClass(Lcd.STYLE_CLASS_FLAT_WET_ASPHALT)
+                .title("Ground Speed")
+                .styleClass(Lcd.STYLE_CLASS_FLAT_POMEGRANATE)
                 .decimals(3)
                 .backgroundVisible(true)
                 .value(0.0)
+                .unit("m/s")
                 .maxMeasuredValueDecimals(3)
                 .minValue(0)
                 .maxValue(99)
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.ELEKTRA)
+                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
 //   .maxSize(100, 60)
                 .build();
-        topRightTopLeftGrid.add(GPSSpeedLCD, 1, 1);
+        topRightTopLeftGrid.add(GPSSpeedLCD, 0,0);
 
 
         //charts
