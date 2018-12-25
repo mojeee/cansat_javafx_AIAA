@@ -45,7 +45,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 
 /**
- * @author alireza
+ * @author Mojtaba Amini
  */
 public class FXMLDocumentController implements Initializable {
 
@@ -359,7 +359,7 @@ public class FXMLDocumentController implements Initializable {
         //elevator LCD
         elevatorLCD = LcdBuilder.create()
                 .title("Elevator")
-                .styleClass(Lcd.STYLE_CLASS_YOCTOPUCE)
+                .styleClass(Lcd.STYLE_CLASS_FLAT_BELIZE_HOLE)
                 .decimals(0)
                 .backgroundVisible(true)
                 .value(0)
@@ -372,13 +372,14 @@ public class FXMLDocumentController implements Initializable {
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
-        topRightBottomRightGrid.add(elevatorLCD, 0, 0);
+        topRightBottomRightGrid.add(elevatorLCD, 0, 1);
 
         //aof LCD
         aofLCD = LcdBuilder.create()
-                .title("Angle of Attack(Deg)")
-                .styleClass(Lcd.STYLE_CLASS_FLAT_WET_ASPHALT)
+                .title("Angle of Attack")
+                .styleClass(Lcd.STYLE_CLASS_FLAT_BELIZE_HOLE)
                 .decimals(0)
+                .unit("deg")
                 .backgroundVisible(true)
                 .value(0)
                 .maxMeasuredValueDecimals(0)
@@ -386,24 +387,25 @@ public class FXMLDocumentController implements Initializable {
                 .maxValue(+20)
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.ELEKTRA)
+                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
-        bottomRightTopRightGrid.add(aofLCD, 0, 0);
+        bottomRightTopRightGrid.add(aofLCD, 0, 1);
 
         //sideSlip LCD
         sideSlipLCD = LcdBuilder.create()
-                .title("Sideslip(Deg)")
-                .styleClass(Lcd.STYLE_CLASS_FLAT_WET_ASPHALT)
+                .title("Sideslip")
+                .styleClass(Lcd.STYLE_CLASS_FLAT_BELIZE_HOLE)
                 .decimals(0)
                 .backgroundVisible(true)
                 .value(0)
+                .unit("deg")
                 .maxMeasuredValueDecimals(0)
                 .minValue(-90)
                 .maxValue(+90)
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.ELEKTRA)
+                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
         bottomRightBottomRightGrid.add(sideSlipLCD, 0, 1);
@@ -456,6 +458,7 @@ public class FXMLDocumentController implements Initializable {
                 .startAngle(180)
                 .angleRange(360)
                 //  .autoScale(false)
+                //.titleColor(Color.BLUE)
                 .customTickLabelsEnabled(true)
                 .customTickLabels("N", "NE", "E", "SE", "S", "SW", "W", "NW", "N")
                 .customTickLabelFontSize(35)
@@ -538,13 +541,18 @@ public class FXMLDocumentController implements Initializable {
                 .threshold(50)
                 .animated(false)
                 .maxValue(20)
+                .borderPaint(Color.GRAY)
+                .thresholdColor(Color.BLACK)
+                .valueColor(Color.WHITE)
+                .foregroundBaseColor(Color.BLACK)
+                .titleColor(Color.WHITE)
                 .build();
         topRightTopRightGrid.add(GPSSats, 1, 1);
         //map
         TileBuilder tileBuilder = TileBuilder.create();
         tileBuilder.skinType(SkinType.MAP);
         tileBuilder.title("Live Location");
-        tileBuilder.currentLocation(new Location(0, 0, "Home"));
+        tileBuilder.currentLocation(new Location(35.701840, 51.352514, "Home"));
         tileBuilder.mapProvider(MapProvider.STREET);
         tileBuilder.animated(false);
         tileBuilder.oldValueVisible(true);
@@ -556,9 +564,10 @@ public class FXMLDocumentController implements Initializable {
         //alfa
         aof = GaugeBuilder
                 .create()
-                .skinType(Gauge.SkinType.VERTICAL)
+                .skinType(Gauge.SkinType.HORIZONTAL)
                 // Related to Title Text
                 .title("Angle of Attack") // Set the text for the title
+                .titleColor(Color.BLUE)
                 .needleType(Gauge.NeedleType.AVIONIC)
                 // Related to Sub Title Text
                 .unit("°") // Set the text for the unit
@@ -569,16 +578,21 @@ public class FXMLDocumentController implements Initializable {
 
                 .build();
 
-        bottomRightTopRightGrid.add(aof, 1, 0);
+        bottomRightTopRightGrid.add(aof, 0, 0);
 
         //betha
         sideSlip = GaugeBuilder
                 .create()
                 .skinType(Gauge.SkinType.HORIZONTAL)
                 // Related to Title Text
-                .title("Sideslip Angle") // Set the text for the title
+                .knobColor(Color.RED)
+                .titleColor(Color.BLUE)
+                .customTickLabelFontSize(12)
+                .title("Sideslip") // Set the text for the title
                 .needleType(Gauge.NeedleType.AVIONIC)
                 // Related to Sub Title Text
+                .minSize(50,50)
+                .maxSize(400,100)
                 .unit("°") // Set the text for the unit
                 .minValue(-50) // Set the start value of the scale
                 .maxValue(+50) // Set the end value of the scale
@@ -588,7 +602,30 @@ public class FXMLDocumentController implements Initializable {
                 .build();
 
         bottomRightBottomRightGrid.add(sideSlip, 0, 0);
-       /* //elevator
+
+
+        elevator = GaugeBuilder
+                .create()
+                .skinType(Gauge.SkinType.HORIZONTAL)
+                // Related to Title Text
+                .knobColor(Color.RED)
+                .titleColor(Color.BLUE)
+                .customTickLabelFontSize(12)
+                .title("Elevator") // Set the text for the title
+                .needleType(Gauge.NeedleType.AVIONIC)
+                // Related to Sub Title Text
+                .minSize(50,50)
+                .maxSize(400,100)
+                .unit("°") // Set the text for the unit
+                .minValue(-15) // Set the start value of the scale
+                .maxValue(+15) // Set the end value of the scale
+                .animationDuration(500) // Speed of the needle in milliseconds (10 - 10000 ms)
+                //    .foregroundBaseColor(Color.WHITE)
+
+                .build();
+
+        topRightBottomRightGrid.add(elevator, 0, 0);
+        /* //elevator
         elevator = GaugeBuilder
                 .create()
                 .skinType(Gauge.SkinType.VERTICAL)
@@ -637,23 +674,25 @@ public class FXMLDocumentController implements Initializable {
         //temp
         temprature = GaugeBuilder
                 .create()
-                .skinType(Gauge.SkinType.FLAT)
+                .skinType(Gauge.SkinType.SLIM)
                 // Related to Title Text
-                .title("Temprature") // Set the text for the title
+                .title("Temperature") // Set the text for the title
                 // Related to Sub Title Text
                 .unit("C") // Set the text for the unit
                 .minValue(-20) // Set the start value of the scale
                 .maxValue(50) // Set the end value of the scale
-                .value(0)
+                .value(40)
+
                 .animationDuration(500) // Speed of the needle in milliseconds (10 - 10000 ms)
                 .build();
         topRightTopRightGrid.add(temprature, 0, 1);
 
         //linear Acc LCD
         linAcc1LCD = LcdBuilder.create()
-                .title("a_X(g)")
-                .styleClass(Lcd.STYLE_CLASS_FLAT_WET_ASPHALT)
+                .title("a_X")
+                .styleClass(Lcd.STYLE_CLASS_YELLOW_BLACK)
                 .decimals(3)
+                .unit("g")
                 .backgroundVisible(true)
                 .value(0.0)
                 .maxMeasuredValueDecimals(3)
@@ -661,30 +700,32 @@ public class FXMLDocumentController implements Initializable {
                 .maxValue(20)
                 .foregroundShadowVisible(false)
                 .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.ELEKTRA)
+                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
         topRightBottomLeftGrid.add(linAcc1LCD, 0, 0);
         //linear Acc LCD
         linAcc2LCD = LcdBuilder.create()
-                .title("a_Y(g)")
-                .styleClass(Lcd.STYLE_CLASS_FLAT_WET_ASPHALT)
+                .title("a_Y")
+                .styleClass(Lcd.STYLE_CLASS_YELLOW_BLACK)
                 .decimals(3)
                 .backgroundVisible(true)
                 .value(0.0)
+                .unit("g")
                 .maxMeasuredValueDecimals(3)
                 .minValue(-20)
                 .maxValue(20)
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.ELEKTRA)
+                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
         topRightBottomLeftGrid.add(linAcc2LCD, 0, 1);
         linAcc3LCD = LcdBuilder.create()
-                .title("a_Z(g)")
-                .styleClass(Lcd.STYLE_CLASS_FLAT_WET_ASPHALT)
+                .title("a_Z")
+                .styleClass(Lcd.STYLE_CLASS_YELLOW_BLACK)
                 .decimals(3)
+                .unit("g")
                 .backgroundVisible(true)
                 .value(0.0)
                 .maxMeasuredValueDecimals(3)
@@ -692,16 +733,16 @@ public class FXMLDocumentController implements Initializable {
                 .maxValue(20)
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.ELEKTRA)
+                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
         topRightBottomLeftGrid.add(linAcc3LCD, 0, 2);
 
         //gyro lcd
         angVelLCD1 = LcdBuilder.create()
-                .title("p(Deg/s)")
+                .title("p")
                 .unit("Deg/s")
-                .styleClass(Lcd.STYLE_CLASS_FLAT_WET_ASPHALT)
+                .styleClass(Lcd.STYLE_CLASS_YELLOW_BLACK)
                 .decimals(3)
                 .backgroundVisible(true)
                 .value(0)
@@ -710,14 +751,15 @@ public class FXMLDocumentController implements Initializable {
                 .maxValue(200)
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.ELEKTRA)
+                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
         topRightBottomLeftGrid.add(angVelLCD1, 1, 0);
 
         angVelLCD2 = LcdBuilder.create()
-                .title("q(Deg/s)")
-                .styleClass(Lcd.STYLE_CLASS_GRAY)
+                .title("q")
+                .unit("deg/s")
+                .styleClass(Lcd.STYLE_CLASS_YELLOW_BLACK)
                 .decimals(3)
                 .backgroundVisible(true)
                 .value(00)
@@ -726,15 +768,16 @@ public class FXMLDocumentController implements Initializable {
                 .maxValue(200)
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.LCD)
+                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
         topRightBottomLeftGrid.add(angVelLCD2, 1, 1);
 
         angVelLCD3 = LcdBuilder.create()
-                .title("r(Deg/s)")
-                .styleClass(Lcd.STYLE_CLASS_FLAT_WET_ASPHALT)
+                .title("r")
+                .styleClass(Lcd.STYLE_CLASS_YELLOW_BLACK)
                 .decimals(3)
+                .unit("deg/s")
                 .backgroundVisible(true)
                 .value(00)
                 .maxMeasuredValueDecimals(3)
@@ -742,7 +785,7 @@ public class FXMLDocumentController implements Initializable {
                 .maxValue(200)
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.ELEKTRA)
+                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
         topRightBottomLeftGrid.add(angVelLCD3, 1, 2);
@@ -750,14 +793,15 @@ public class FXMLDocumentController implements Initializable {
 
         //force LCD
         force1LCD = LcdBuilder.create()
-                .title("Force 1(gr)")
-                .styleClass(Lcd.STYLE_CLASS_FLAT_WET_ASPHALT)
+                .title("Force 1")
+                .unit("gr")
+                .styleClass(Lcd.STYLE_CLASS_FLAT_GREEN_SEA)
                 .decimals(0)
                 .backgroundVisible(true)
                 .maxMeasuredValueDecimals(0)
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.ELEKTRA)
+                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .maxValue(100000)
                 .minValue(-100000)
@@ -765,15 +809,15 @@ public class FXMLDocumentController implements Initializable {
         bottomRightTopLeftGrid.add(force1LCD, 0, 0);
 
         force2LCD = LcdBuilder.create()
-                .title("Force 2(gr)")
-                .styleClass(Lcd.STYLE_CLASS_FLAT_WET_ASPHALT)
+                .title("Force 2")
+                .styleClass(Lcd.STYLE_CLASS_FLAT_GREEN_SEA)
                 .decimals(0)
                 .backgroundVisible(true)
                 .maxMeasuredValueDecimals(0)
-
+                .unit("gr")
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.ELEKTRA)
+                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .maxValue(100000)
 
@@ -783,14 +827,15 @@ public class FXMLDocumentController implements Initializable {
         bottomRightTopLeftGrid.add(force2LCD, 0, 1);
 
         packetTimeLCD = LcdBuilder.create()
-                .title("Mission Time(s)")
-                .styleClass(Lcd.STYLE_CLASS_FLAT_WET_ASPHALT)
+                .title("Mission Time")
+                .styleClass(Lcd.STYLE_CLASS_FLAT_MIDNIGHT_BLUE)
                 .decimals(3)
+                .unit("s")
                 .backgroundVisible(true)
                 .maxMeasuredValueDecimals(3)
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.ELEKTRA)
+                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .maxValue(10000)
 
@@ -801,14 +846,15 @@ public class FXMLDocumentController implements Initializable {
 
 
         force3LCD = LcdBuilder.create()
-                .title("Force 3(gr)")
-                .styleClass(Lcd.STYLE_CLASS_FLAT_WET_ASPHALT)
+                .title("Force 3")
+                .styleClass(Lcd.STYLE_CLASS_FLAT_GREEN_SEA)
                 .decimals(0)
+                .unit("gr")
                 .backgroundVisible(true)
                 .maxMeasuredValueDecimals(0)
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.ELEKTRA)
+                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .maxValue(100000)
 
@@ -818,16 +864,15 @@ public class FXMLDocumentController implements Initializable {
         bottomRightTopLeftGrid.add(force3LCD, 1, 0);
 
         force4LCD = LcdBuilder.create()
-                .title("Force 4(gr)")
-
-                .styleClass(Lcd.STYLE_CLASS_FLAT_WET_ASPHALT)
+                .title("Force 4")
+                .styleClass(Lcd.STYLE_CLASS_FLAT_GREEN_SEA)
                 .decimals(0)
                 .backgroundVisible(true)
                 .maxMeasuredValueDecimals(0)
-
+                .unit("gr")
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.ELEKTRA)
+                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .maxValue(100000)
 
