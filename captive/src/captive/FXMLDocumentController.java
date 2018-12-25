@@ -321,35 +321,36 @@ public class FXMLDocumentController implements Initializable {
         topLeftGrid.add(horizon, 0, 0);
         //rollLCD
         rollLCD = LcdBuilder.create()
-                .title("Roll(Deg)")
-                .styleClass(Lcd.STYLE_CLASS_FLAT_WET_ASPHALT)
+                .title("Roll")
+                .styleClass(Lcd.STYLE_CLASS_GREEN_DARKGREEN)
                 .decimals(0)
                 .backgroundVisible(true)
                 .value(0)
                 .maxMeasuredValueDecimals(0)
                 .minValue(-180)
-
+                .unit("deg")
                 .maxValue(180)
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.ELEKTRA)
+                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
         topLeftTopRightGrid.add(rollLCD, 0, 0);
 
         //pitchLCD
         pitchLCD = LcdBuilder.create()
-                .title("Pitch(Deg)")
-                .styleClass(Lcd.STYLE_CLASS_FLAT_WET_ASPHALT)
+                .title("Pitch")
+                .styleClass(Lcd.STYLE_CLASS_GREEN_DARKGREEN)
                 .decimals(0)
                 .backgroundVisible(true)
                 .value(0)
+                .unit("deg")
                 .maxMeasuredValueDecimals(0)
                 .minValue(-180)
                 .maxValue(180)
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.ELEKTRA)
+                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
         topLeftTopRightGrid.add(pitchLCD, 0, 1);
@@ -357,17 +358,18 @@ public class FXMLDocumentController implements Initializable {
 
         //elevator LCD
         elevatorLCD = LcdBuilder.create()
-                .title("Elevator(Deg)")
-                .styleClass(Lcd.STYLE_CLASS_FLAT_WET_ASPHALT)
+                .title("Elevator")
+                .styleClass(Lcd.STYLE_CLASS_YOCTOPUCE)
                 .decimals(0)
                 .backgroundVisible(true)
                 .value(0)
+                .unit("deg")
                 .maxMeasuredValueDecimals(0)
                 .minValue(-50)
                 .maxValue(+50)
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.ELEKTRA)
+                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
         topRightBottomRightGrid.add(elevatorLCD, 0, 0);
@@ -407,42 +409,44 @@ public class FXMLDocumentController implements Initializable {
         bottomRightBottomRightGrid.add(sideSlipLCD, 0, 1);
 
         //Altimeter
-        altimeter = new Altimeter();
+/*        altimeter = new Altimeter();
         topLeftBottomRightGrid.add(altimeter, 0, 0);
-        //altLCD
+*/        //altLCD
         altLCD = LcdBuilder.create()
-                .title("Barometric Altitude(m)")
-                .styleClass(Lcd.STYLE_CLASS_FLAT_WET_ASPHALT)
+                .title("Barometric Altitude")
+                .styleClass(Lcd.STYLE_CLASS_BLACK_YELLOW)
                 .decimals(0)
+                .unit("m")
                 .backgroundVisible(true)
                 .value(0)
                 .maxMeasuredValueDecimals(0)
                 .maxValue(10000)
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.ELEKTRA)
+                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
         topLeftBottomRightGrid.add(altLCD, 0, 1);
 
         //Altimeter
-        altimeter2 = new Altimeter();
+   /*     altimeter2 = new Altimeter();
         topLeftBottomRightGrid.add(altimeter2, 1, 0);
-        //altLCD2
+  */      //altLCD2
         altLCD2 = LcdBuilder.create()
-                .title("GPS Altitude(m)")
-                .styleClass(Lcd.STYLE_CLASS_FLAT_WET_ASPHALT)
+                .title("GPS Altitude")
+                .styleClass(Lcd.STYLE_CLASS_BLACK_YELLOW)
                 .decimals(0)
+                .unit("m")
                 .backgroundVisible(true)
                 .value(0)
                 .maxMeasuredValueDecimals(0)
                 .maxValue(10000)
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.ELEKTRA)
+                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
-        topLeftBottomRightGrid.add(altLCD2, 1, 1);
+        topLeftBottomRightGrid.add(altLCD2, 0, 0);
 
 
         //compass
@@ -470,21 +474,22 @@ public class FXMLDocumentController implements Initializable {
                 //      .foregroundBaseColor(Color.WHITE)
 
                 .build();
-        topLeftGrid.add(compass, 0, 1);
+        topLeftGrid.add(compass, 1, 0);
         //topLeftGrid.add(realCompass, 0,1);
         //headingLCD
         headingLCD = LcdBuilder.create()
-                .title("Heading(Deg)")
-                .styleClass(Lcd.STYLE_CLASS_FLAT_WET_ASPHALT)
+                .title("Heading")
+                .styleClass(Lcd.STYLE_CLASS_GREEN_DARKGREEN)
                 .decimals(0)
                 .backgroundVisible(true)
                 .value(0)
+                .unit("deg")
                 .maxMeasuredValueDecimals(0)
                 .minValue(-360)
                 .maxValue(360)
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.ELEKTRA)
+                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
         topLeftTopRightGrid.add(headingLCD, 0, 2);
@@ -583,7 +588,7 @@ public class FXMLDocumentController implements Initializable {
                 .build();
 
         bottomRightBottomRightGrid.add(sideSlip, 0, 0);
-        //elevator
+       /* //elevator
         elevator = GaugeBuilder
                 .create()
                 .skinType(Gauge.SkinType.VERTICAL)
@@ -600,7 +605,7 @@ public class FXMLDocumentController implements Initializable {
                 .build();
         elevator.setValue(5);
         topRightBottomRightGrid.add(elevator, 1, 0);
-        //aileron
+       */ //aileron
 //  aileron = GaugeBuilder
 //   .create()
 //   .skinType(Gauge.SkinType.VERTICAL)
