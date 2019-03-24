@@ -107,7 +107,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <Button mnemonicParsing="false" onAction="#zeroTime" prefHeight="26.0" prefWidth="130.0" text="Zero Time" GridPane.columnIndex="4" GridPane.halignment="RIGHT">
+            <Button mnemonicParsing="false" onAction="#zeroTime" prefHeight="26.0" prefWidth="160.0" text="Zero time and sensors" GridPane.columnIndex="4" GridPane.halignment="RIGHT">
                <GridPane.margin>
                   <Insets right="50.0" />
                </GridPane.margin>

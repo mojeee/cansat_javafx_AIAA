@@ -318,7 +318,7 @@ public class FXMLDocumentController implements Initializable {
         // Horizon Creation
         horizon = new Horizon();
         //horizon.setAnimated(false);
-        topLeftGrid.add(horizon, 0, 0);
+        topRightTopLeftGrid.add(horizon, 0, 0);
         //rollLCD
         rollLCD = LcdBuilder.create()
                 .title("Roll")
@@ -335,7 +335,7 @@ public class FXMLDocumentController implements Initializable {
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
-        topLeftTopRightGrid.add(rollLCD, 0, 0);
+        bottomRightBottomRightGrid.add(rollLCD, 1, 0);
 
         //pitchLCD
         pitchLCD = LcdBuilder.create()
@@ -353,7 +353,7 @@ public class FXMLDocumentController implements Initializable {
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
-        topLeftTopRightGrid.add(pitchLCD, 0, 1);
+        bottomRightBottomRightGrid.add(pitchLCD, 1, 1);
 
 
         //elevator LCD
@@ -408,7 +408,7 @@ public class FXMLDocumentController implements Initializable {
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
-        bottomRightBottomRightGrid.add(sideSlipLCD, 0, 1);
+        topRightBottomLeftGrid.add(sideSlipLCD, 0, 1);
 
         //Altimeter
 /*        altimeter = new Altimeter();
@@ -428,7 +428,7 @@ public class FXMLDocumentController implements Initializable {
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
-        topLeftBottomRightGrid.add(altLCD, 0, 1);
+        bottomRightBottomRightGrid.add(altLCD, 0, 1);
 
         //Altimeter
    /*     altimeter2 = new Altimeter();
@@ -477,7 +477,7 @@ public class FXMLDocumentController implements Initializable {
                 //      .foregroundBaseColor(Color.WHITE)
 
                 .build();
-        topLeftGrid.add(compass, 1, 0);
+        topRightTopLeftGrid.add(compass, 1, 0);
         //topLeftGrid.add(realCompass, 0,1);
         //headingLCD
         headingLCD = LcdBuilder.create()
@@ -495,7 +495,7 @@ public class FXMLDocumentController implements Initializable {
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
-        topLeftBottomRightGrid.add(headingLCD, 0, 0);
+        bottomRightBottomRightGrid.add(headingLCD, 0, 0);
 
         //Ground Speed
   /*      gSpeed = GaugeBuilder
@@ -547,7 +547,7 @@ public class FXMLDocumentController implements Initializable {
                 .foregroundBaseColor(Color.BLACK)
                 .titleColor(Color.WHITE)
                 .build();
-        topRightBottomLeftGrid.add(GPSSats, 0, 0);
+       // topRightBottomLeftGrid.add(GPSSats, 0, 0);
         //map
         TileBuilder tileBuilder = TileBuilder.create();
         tileBuilder.skinType(SkinType.MAP);
@@ -601,7 +601,7 @@ public class FXMLDocumentController implements Initializable {
 
                 .build();
 
-        bottomRightBottomRightGrid.add(sideSlip, 0, 0);
+       topRightBottomLeftGrid.add(sideSlip, 0, 0);
 
 
         elevator = GaugeBuilder
@@ -896,7 +896,7 @@ public class FXMLDocumentController implements Initializable {
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
-        topRightTopLeftGrid.add(airSpeedLCD, 0, 1);
+        bottomRightTopRightGrid.add(airSpeedLCD, 1, 0);
 
 
         GPSSpeedLCD = LcdBuilder.create()
@@ -915,7 +915,7 @@ public class FXMLDocumentController implements Initializable {
                 .animated(false)
 //   .maxSize(100, 60)
                 .build();
-        topRightTopLeftGrid.add(GPSSpeedLCD, 0,0);
+        bottomRightTopRightGrid.add(GPSSpeedLCD, 1,1);
 
 
         //charts
