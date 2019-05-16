@@ -787,7 +787,7 @@ public class FXMLDocumentController implements Initializable {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Data Series");
         lineChart_speed.setLegendVisible(false);
-
+        lineChart_speed.setCreateSymbols(false);
         // add series to chart
         lineChart_speed.getData().add(series);
         // setup scene

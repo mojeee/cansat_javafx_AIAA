@@ -26,7 +26,7 @@ public class Captive extends Application
         scene.getStylesheets().add(Captive.class.getResource("styles.css").toExternalForm());
         stage.setScene(scene);
         stage.setTitle("Helix Cansat V 3.6");
-        stage.getIcons().add(new Image("captive/icon.png"));
+        stage.getIcons().add(new Image("captive/icon.jpg"));
         stage.show();
     }
 
