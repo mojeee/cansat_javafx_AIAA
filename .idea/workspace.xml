@@ -7,10 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d00e933e-b0c8-4297-ba0d-250282ba94a5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/captive/src/captive/FXMLDocument.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/captive/src/captive/FXMLDocument.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/captive/src/captive/FXMLDocumentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/captive/src/captive/FXMLDocumentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/captive/src/captive/Telemetry.java" beforeDir="false" afterPath="$PROJECT_DIR$/captive/src/captive/Telemetry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/captive/src/captive/horizon.css" beforeDir="false" afterPath="$PROJECT_DIR$/captive/src/captive/horizon.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/captive/src/captive/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/captive/src/captive/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/production/Captive/captive/FXMLDocument.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/output/production/Captive/captive/FXMLDocument.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,8 +47,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/captive/src/captive/Telemetry.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="17" column="10" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
+            <state relative-caret-position="280">
+              <caret line="73" column="53" selection-start-line="73" selection-start-column="53" selection-end-line="73" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -59,8 +59,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/captive/src/captive/FXMLDocumentController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="833" column="50" selection-start-line="833" selection-start-column="50" selection-end-line="833" selection-end-column="50" />
+            <state relative-caret-position="136">
+              <caret line="818" selection-start-line="818" selection-end-line="818" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -82,8 +82,8 @@
         <entry file="file://$PROJECT_DIR$/captive/src/captive/FXMLDocument.fxml">
           <provider editor-type-id="JavaFX-Scene-Builder" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
+            <state relative-caret-position="17">
+              <caret line="56" column="20" selection-start-line="56" selection-start-column="20" selection-end-line="56" selection-end-column="20" />
               <folding>
                 <element signature="n#columnConstraints#0;n#GridPane#0;n#children#0;n#AnchorPane#0;n#!!top" />
                 <element signature="n#rowConstraints#0;n#GridPane#0;n#children#0;n#AnchorPane#0;n#!!top" />
@@ -123,15 +123,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>altitu</find>
-      <find>alt</find>
-      <find>alti</find>
-      <find>AltitudeLCD</find>
-      <find>Alti</find>
-      <find>tem</find>
-      <find>colo</find>
-      <find>bat</find>
-      <find>volta</find>
       <find>Ground</find>
       <find>GPSSpeedLCD</find>
       <find>temprature</find>
@@ -147,12 +138,21 @@
       <find>force3LCD</find>
       <find>GPSAlt</find>
       <find>GPS</find>
-      <find>gps</find>
       <find>force1LCD</find>
-      <find>Al</find>
       <find>sat</find>
       <find>sta</find>
       <find>force2LCD</find>
+      <find>roll</find>
+      <find>elevatorLCD</find>
+      <find>elev</find>
+      <find>gps</find>
+      <find>topri</find>
+      <find>toprightbot</find>
+      <find>toprighttop</find>
+      <find>BladeSpinRateLCD</find>
+      <find>pre</find>
+      <find>Al</find>
+      <find>bott</find>
     </findStrings>
     <replaceStrings>
       <replace>\\</replace>
@@ -167,10 +167,10 @@
         <option value="$PROJECT_DIR$/libraries/styles.css" />
         <option value="$PROJECT_DIR$/captive/src/captive/FXMLDocument_1.fxml" />
         <option value="$PROJECT_DIR$/captive/src/captive/Captive.java" />
-        <option value="$PROJECT_DIR$/captive/src/captive/FXMLDocument.fxml" />
         <option value="$PROJECT_DIR$/captive/src/captive/horizon.css" />
         <option value="$PROJECT_DIR$/captive/src/captive/styles.css" />
         <option value="$PROJECT_DIR$/captive/src/captive/Telemetry.java" />
+        <option value="$PROJECT_DIR$/captive/src/captive/FXMLDocument.fxml" />
         <option value="$PROJECT_DIR$/captive/src/captive/FXMLDocumentController.java" />
       </list>
     </option>
@@ -364,18 +364,6 @@
     <entry file="file://$PROJECT_DIR$/captive/src/captive/icon.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/captive/src/captive/FXMLDocument.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
-          <folding>
-            <element signature="n#columnConstraints#0;n#GridPane#0;n#children#0;n#AnchorPane#0;n#!!top" />
-            <element signature="n#rowConstraints#0;n#GridPane#0;n#children#0;n#AnchorPane#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/captive/src/captive/FXMLDocument_1.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
@@ -427,18 +415,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/captive/src/captive/Telemetry.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="17" column="10" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
+        <state relative-caret-position="280">
+          <caret line="73" column="53" selection-start-line="73" selection-start-column="53" selection-end-line="73" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/captive/src/captive/FXMLDocument.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="56" column="20" selection-start-line="56" selection-start-column="20" selection-end-line="56" selection-end-column="20" />
+          <folding>
+            <element signature="n#columnConstraints#0;n#GridPane#0;n#children#0;n#AnchorPane#0;n#!!top" />
+            <element signature="n#rowConstraints#0;n#GridPane#0;n#children#0;n#AnchorPane#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/captive/src/captive/FXMLDocumentController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="833" column="50" selection-start-line="833" selection-start-column="50" selection-end-line="833" selection-end-column="50" />
+        <state relative-caret-position="136">
+          <caret line="818" selection-start-line="818" selection-end-line="818" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

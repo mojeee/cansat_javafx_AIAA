@@ -15,16 +15,17 @@ public class Telemetry {
     public int GPSTime;
     public int GPSLatitude;
     public int GPSLongitude;
-    public float GPSALtitude;
-
+    public float GPSAltitude;
+    public int pitch;
+    public int roll;
+    public int BladeSpinRate;
 
 
 
 
 
   public long logTime;
-  public int roll;
-  public int pitch;
+
 
 
   public int  elevator;
@@ -67,8 +68,10 @@ public void parseString(){
         GPSTime = Integer.parseInt(values[i++]);
         GPSLatitude=Integer.parseInt(values[i++]);
         GPSLongitude=Integer.parseInt(values[i++]);
-        GPSALtitude=Float.parseFloat(values[i++]);
-
+        GPSAltitude=Float.parseFloat(values[i++]);
+        pitch = Integer.parseInt(values[i++]);
+        roll = Integer.parseInt(values[i++]);
+        BladeSpinRate= Integer.parseInt(values[i++]);
 
 
 
@@ -76,8 +79,6 @@ public void parseString(){
 
 logTime = Integer.parseInt(values[i++]);
 
-roll = Integer.parseInt(values[i++]);
-pitch = Integer.parseInt(values[i++]);
 
 elevator = Integer.parseInt(values[i++]);
 aileron = Integer.parseInt(values[i++]);

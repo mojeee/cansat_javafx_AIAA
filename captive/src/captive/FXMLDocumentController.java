@@ -21,8 +21,13 @@ import eu.hansolo.tilesfx.tools.Location;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -38,6 +43,9 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ConcurrentModificationException;
 import java.util.Date;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -107,7 +115,7 @@ public class FXMLDocumentController implements Initializable {
     private Lcd pitchLCD = null;
     private Lcd altLCD = null;
     private Lcd altLCD2 = null;
-    private Lcd elevatorLCD = null;
+    private Lcd BladeSpinRateLCD = null;
     private Lcd aofLCD = null;
     private Lcd sideSlipLCD = null;
     private Lcd linAcc1LCD = null;
@@ -346,7 +354,7 @@ public class FXMLDocumentController implements Initializable {
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
-        bottomRightBottomRightGrid.add(rollLCD, 1, 0);
+        bottomRightTopRightGrid.add(rollLCD, 1, 0);
 
         //pitchLCD
         pitchLCD = LcdBuilder.create()
@@ -364,17 +372,17 @@ public class FXMLDocumentController implements Initializable {
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
-        bottomRightBottomRightGrid.add(pitchLCD, 1, 1);
+        bottomRightTopRightGrid.add(pitchLCD, 1, 1);
 
 
         //elevator LCD
-        elevatorLCD = LcdBuilder.create()
-                .title("Elevator")
+        BladeSpinRateLCD = LcdBuilder.create()
+                .title("Blade Spin Rate")
                 .styleClass(Lcd.STYLE_CLASS_FLAT_BELIZE_HOLE)
                 .decimals(0)
                 .backgroundVisible(true)
                 .value(0)
-                .unit("deg")
+                .unit("rad/s")
                 .maxMeasuredValueDecimals(0)
                 .minValue(-50)
                 .maxValue(+50)
@@ -383,7 +391,7 @@ public class FXMLDocumentController implements Initializable {
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
-      //  topRightBottomRightGrid.add(elevatorLCD, 0, 1);
+        bottomRightTopRightGrid.add(BladeSpinRateLCD, 0, 1);
 
         //aof LCD
         aofLCD = LcdBuilder.create()
@@ -404,8 +412,8 @@ public class FXMLDocumentController implements Initializable {
        // bottomRightTopRightGrid.add(aofLCD, 0, 1);
 
         //sideSlip LCD
-        sideSlipLCD = LcdBuilder.create()
-                .title("Spin rate")
+       /* BladeSpinRateLCD = LcdBuilder.create()
+                .title("Blade Spin rate")
                 .styleClass(Lcd.STYLE_CLASS_FLAT_BELIZE_HOLE)
                 .decimals(0)
                 .backgroundVisible(true)
@@ -419,8 +427,8 @@ public class FXMLDocumentController implements Initializable {
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
-        topRightBottomRightGrid.add(sideSlipLCD, 0, 1);
-
+        topRightTopRightGrid.add(BladeSpinRateLCD, 0, 3);
+*/
         //Altimeter
 /*        altimeter = new Altimeter();
         topLeftBottomRightGrid.add(altimeter, 0, 0);
@@ -439,7 +447,7 @@ public class FXMLDocumentController implements Initializable {
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
-        topRightBottomRightGrid.add(AltitudeLCD, 0, 0);
+        topRightTopRightGrid.add(AltitudeLCD, 0, 2);
 
         //Altimeter
    /*     altimeter2 = new Altimeter();
@@ -536,7 +544,7 @@ public class FXMLDocumentController implements Initializable {
                 .maxValue(100) // Set the end value of the scale
                 .animationDuration(500) // Speed of the needle in milliseconds (10 - 10000 ms)
                 .build();
-        topRightBottomRightGrid.add(battery, 1, 0);
+        topRightTopRightGrid.add(battery, 1, 2);
 
         //temp
 
@@ -554,7 +562,7 @@ public class FXMLDocumentController implements Initializable {
                 .value(40)
                 .animationDuration(500) // Speed of the needle in milliseconds (10 - 10000 ms)
                 .build();
-        topRightBottomRightGrid.add(temperature, 1, 1);
+        topRightTopRightGrid.add(temperature, 1, 3);
 
         //linear Acc LCD
         linAcc1LCD = LcdBuilder.create()
@@ -653,7 +661,7 @@ public class FXMLDocumentController implements Initializable {
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
-        topRightBottomRightGrid.add(PressureLCD, 0, 1);
+        topRightTopRightGrid.add(PressureLCD, 0, 3);
 
 
         //force LCD
@@ -749,11 +757,9 @@ public class FXMLDocumentController implements Initializable {
 
         GPSTimeLCD = LcdBuilder.create()
                 .title("GPS Time (UTC)")
-                .styleClass(LcdClock.STYLE_CLASS_GREEN_DARKGREEN)
-
+                .styleClass(LcdClock.STYLE_CLASS_FLAT_GREEN_SEA)
                 .backgroundVisible(true)
                 .value(0)
-
                 .maxMeasuredValueDecimals(3)
                 .minValue(0)
                 .foregroundShadowVisible(true)
@@ -762,7 +768,57 @@ public class FXMLDocumentController implements Initializable {
                 .animated(false)
 //   .maxSize(100, 60)
                 .build();
-        topRightTopRightGrid.add(GPSTimeLCD, 1,1);
+        bottomRightTopRightGrid.add(GPSTimeLCD, 0,0);
+
+// first plot************************************************************************************
+        final CategoryAxis xAxis_speed = new CategoryAxis(); // we are gonna plot against time
+        final NumberAxis yAxis_speed = new NumberAxis();
+        xAxis_speed.setLabel("Time(s)");
+        xAxis_speed.setAnimated(false); // axis animations are removed
+        yAxis_speed.setLabel("Speed ( m/s )");
+        yAxis_speed.setAnimated(false); // axis animations are removed
+
+        //creating the line chart with two axis created above
+        final LineChart<String, Number> lineChart_speed = new LineChart<>(xAxis_speed, yAxis_speed);
+        lineChart_speed.setTitle("Payload Speed Realtime Plot");
+        lineChart_speed.setAnimated(false); // disable animations
+        // show the stage
+        //defining a series to display data
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Data Series");
+        lineChart_speed.setLegendVisible(false);
+
+        // add series to chart
+        lineChart_speed.getData().add(series);
+        // setup scene
+//            Scene scene = new Scene(lineChart, 800, 600);
+        // this is used to display time in HH:mm:ss format
+        final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ss");
+
+        // setup a scheduled executor to periodically put data into the chart
+        ScheduledExecutorService scheduledExecutorService;
+        scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+
+        // put dummy data onto graph per second
+        scheduledExecutorService.scheduleAtFixedRate(() -> {
+            // get a random integer between 0-10
+            Integer random = 5;
+
+            // Update the chart
+            Platform.runLater(() -> {
+                // get current time
+                Date now = new Date();
+                // put random number with current time
+                series.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), random));
+            });
+        }, 0, 1, TimeUnit.SECONDS);
+        //  root.getChildren().addAll();
+
+        topRightGrid.add(lineChart_speed, 0 , 0);
+
+
+
+
 
 
         //charts
@@ -831,22 +887,23 @@ public class FXMLDocumentController implements Initializable {
         GPSTimeLCD.setValue(tele.GPSTime);
         GPSLatitudeLCD.setValue(tele.GPSLatitude);
         GPSLongitudeLCD.setValue(tele.GPSLongitude);
-        GPSAltitudeLCD.setValue(tele.GPSALtitude);
+        GPSAltitudeLCD.setValue(tele.GPSAltitude);
         GPSSatsLCD.setValue(tele.GPSSats);
-
-
-
-
-
-
-
-
-
-
         pitchLCD.setValue(tele.pitch);
+        rollLCD.setValue(tele.roll);
+        BladeSpinRateLCD.setValue(tele.BladeSpinRate);
+
+
+
+
+
+
+
+
+
+
         horizon.setPitch(Double.parseDouble(String.valueOf(tele.pitch)));
         horizon.setRoll(Double.parseDouble(String.valueOf(tele.roll)));
-        rollLCD.setValue(tele.roll);
 
         altimeter.setValue(tele.pAlt);
         altLCD.setValue(tele.pAlt);
@@ -858,7 +915,6 @@ public class FXMLDocumentController implements Initializable {
         sideSlipLCD.setValue(tele.betha);
         sideSlip.setValue(tele.betha);
         elevator.setValue(tele.elevator);
-        elevatorLCD.setValue(tele.elevator);
 // aileron.setValue(tele.aileron);
         mapTile.setCurrentLocation(new Location(tele.GPSLat, tele.GPSLong));
 //
