@@ -4,26 +4,30 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Telemetry {
-  public int checkSumStart=201;
-  public int missionTime;
+    public int checkSumStart=201;
+    public int TeamID;
+    public int missionTime;
+    public float Altitude;
+    public int PacketCount;
+    public int Pressure;
+
+
+
   public long logTime;
   public int roll;
   public int pitch;
-  public int heading;
- public float airSpeed;
+
+
   public int  elevator;
   public int  aileron;
   public int  alfa;
   public int  betha;
   public int  standAngle;
-  public int pressure;
   public int pAlt;
  public float ax;
   public float ay;
  public float az;
  public float gx;
- public float gy;
- public float gz;
   public int lc1;
   public int lc2;
   public int lc3;
@@ -44,26 +48,31 @@ public void initString(String s){
 public void parseString(){
     String[] values = payloadString.split(",");
     int i =0;
-checkSumStart = Integer.parseInt(values[i++]);
+        checkSumStart = Integer.parseInt(values[i++]);
+        TeamID = Integer.parseInt(values[i++]);
+        missionTime = Integer.parseInt(values[i++]);
+        PacketCount = Integer.parseInt(values[i++]);
+        Altitude = Float.parseFloat(values[i++]);
+        Pressure = Integer.parseInt(values[i++]);
+
+
+
 logTime = Integer.parseInt(values[i++]);
-missionTime = Integer.parseInt(values[i++]);
+
 roll = Integer.parseInt(values[i++]);
 pitch = Integer.parseInt(values[i++]);
-heading = Integer.parseInt(values[i++]);
-airSpeed = Float.parseFloat(values[i++]);
+
 elevator = Integer.parseInt(values[i++]);
 aileron = Integer.parseInt(values[i++]);
 alfa = Integer.parseInt(values[i++]);
 betha = Integer.parseInt(values[i++]);
 standAngle = Integer.parseInt(values[i++]);
-pressure = Integer.parseInt(values[i++]);
 pAlt = Integer.parseInt(values[i++]);
 ax = Float.parseFloat(values[i++]);
 ay = Float.parseFloat(values[i++]);
 az = Float.parseFloat(values[i++]);
 gx = Float.parseFloat(values[i++]);
-gy = Float.parseFloat(values[i++]);
-gz = Float.parseFloat(values[i++]);
+
 lc1 = Integer.parseInt(values[i++]);
 lc2 = Integer.parseInt(values[i++]);
 lc3 = Integer.parseInt(values[i++]);

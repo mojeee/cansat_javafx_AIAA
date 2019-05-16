@@ -93,20 +93,19 @@ public class FXMLDocumentController implements Initializable {
     private Lcd linAcc2LCD = null;
     private Lcd linAcc3LCD = null;
     private Lcd angVelLCD1 = null;
-    private Lcd angVelLCD2 = null;
-    private Lcd angVelLCD3 = null;
-    private Lcd headingLCD = null;
+    private Lcd PacketCountLCD = null;
+    private Lcd PressureLCD = null;
+    private Lcd TeamIDLCD = null;
     private Lcd force1LCD = null;
     private Lcd force2LCD = null;
     private Lcd force3LCD = null;
     private Lcd force4LCD = null;
     private Lcd GPSSpeedLCD = null;
-    private Lcd airSpeedLCD = null;
+    private Lcd AltitudeLCD = null;
     private Altimeter altimeter = null;
     private Altimeter altimeter2 = null;
     private Gauge compass = null;
     private Gauge gSpeed = null;
-    private Gauge airSpeed = null;
     private Gauge GPSSats = null;
     private Gauge aof = null;
     private Gauge battery = null;
@@ -186,7 +185,7 @@ public class FXMLDocumentController implements Initializable {
         exportCSV = true;
         recordCSVBtn.setText("Recording...");
         recordCSVBtn.setDisable(true);
-        writeToCSV("checksumStart," + "logTime," + "missionTime," + "roll," + "pitch," + "heading," + "airSpeed," + "elevator," + "aileron," + "alfa," + "beta," + "standAngle," + "pressure," + "pressureAlt," + "ax," + "ay," + "az," + "p," + "q," + "r," + "lc1," + "lc2," + "lc3," + "lc4," + "temprature," + "voltage," + "GPSSats," + "GPSLat," + "GPSLong," + "GPSAlt," + "GPSSpeed," + "checksumEnd");
+        writeToCSV("checksumStart," + "TeamID," + "logTime," + "missionTime," + "roll," + "pitch," + "airSpeed," + "elevator," + "aileron," + "alfa," + "beta," + "standAngle," + "pressure," + "pressureAlt," + "ax," + "ay," + "az," + "p," + "q," + "r," + "lc1," + "lc2," + "lc3," + "lc4," + "temprature," + "voltage," + "GPSSats," + "GPSLat," + "GPSLong," + "GPSAlt," + "GPSSpeed," + "checksumEnd");
     }
 
 
@@ -414,9 +413,9 @@ public class FXMLDocumentController implements Initializable {
 /*        altimeter = new Altimeter();
         topLeftBottomRightGrid.add(altimeter, 0, 0);
 */        //altLCD
-        altLCD = LcdBuilder.create()
-                .title("Barometric Altitude")
-                .styleClass(Lcd.STYLE_CLASS_BLACK_YELLOW)
+        AltitudeLCD = LcdBuilder.create()
+                .title("Altitude")
+                .styleClass(Lcd.STYLE_CLASS_YELLOW_BLACK)
                 .decimals(0)
                 .unit("m")
                 .backgroundVisible(true)
@@ -428,7 +427,7 @@ public class FXMLDocumentController implements Initializable {
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
-        bottomRightBottomRightGrid.add(altLCD, 0, 1);
+        topRightBottomRightGrid.add(AltitudeLCD, 0, 0);
 
         //Altimeter
    /*     altimeter2 = new Altimeter();
@@ -453,22 +452,20 @@ public class FXMLDocumentController implements Initializable {
 
 
         //headingLCD
-        headingLCD = LcdBuilder.create()
-                .title("Heading")
+        TeamIDLCD = LcdBuilder.create()
+                .title("Team ID")
                 .styleClass(Lcd.STYLE_CLASS_GREEN_DARKGREEN)
                 .decimals(0)
                 .backgroundVisible(true)
                 .value(0)
-                .unit("deg")
                 .maxMeasuredValueDecimals(0)
-                .minValue(-360)
-                .maxValue(360)
+                .maxValue(2000)
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
-        bottomRightBottomRightGrid.add(headingLCD, 0, 0);
+        topRightTopRightGrid.add(TeamIDLCD, 0, 0);
 
         //Ground Speed
   /*      gSpeed = GaugeBuilder
@@ -545,7 +542,7 @@ public class FXMLDocumentController implements Initializable {
                 .maxValue(100) // Set the end value of the scale
                 .animationDuration(500) // Speed of the needle in milliseconds (10 - 10000 ms)
                 .build();
-        topRightTopRightGrid.add(battery, 1, 0);
+        topRightBottomRightGrid.add(battery, 1, 0);
 
         //temp
         temprature = GaugeBuilder
@@ -561,7 +558,7 @@ public class FXMLDocumentController implements Initializable {
 
                 .animationDuration(500) // Speed of the needle in milliseconds (10 - 10000 ms)
                 .build();
-        topRightTopRightGrid.add(temprature, 1, 1);
+        topRightBottomRightGrid.add(temprature, 1, 1);
 
         //linear Acc LCD
         linAcc1LCD = LcdBuilder.create()
@@ -632,27 +629,23 @@ public class FXMLDocumentController implements Initializable {
                 .build();
       //  topRightBottomLeftGrid.add(angVelLCD1, 1, 0);
 
-        angVelLCD2 = LcdBuilder.create()
-                .title("q")
-                .unit("deg/s")
-                .styleClass(Lcd.STYLE_CLASS_YELLOW_BLACK)
-                .decimals(3)
+        PacketCountLCD = LcdBuilder.create()
+                .title("Packet Count")
+                .styleClass(Lcd.STYLE_CLASS_GREEN_DARKGREEN)
                 .backgroundVisible(true)
                 .value(00)
-                .maxMeasuredValueDecimals(3)
-                .minValue(-200)
-                .maxValue(200)
+                .maxValue(1000)
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
-     ///   topRightBottomLeftGrid.add(angVelLCD2, 1, 1);
+        topRightTopRightGrid.add(PacketCountLCD, 1, 0);
 
-        angVelLCD3 = LcdBuilder.create()
+        PressureLCD = LcdBuilder.create()
                 .title("Pressure")
                 .styleClass(Lcd.STYLE_CLASS_YELLOW_BLACK)
-                .decimals(3)
+                .decimals(1)
                 .unit("Pa")
                 .backgroundVisible(true)
                 .value(00)
@@ -664,7 +657,7 @@ public class FXMLDocumentController implements Initializable {
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
-        bottomRightTopRightGrid.add(angVelLCD3, 0, 1);
+        topRightBottomRightGrid.add(PressureLCD, 0, 1);
 
 
         //force LCD
@@ -704,8 +697,8 @@ public class FXMLDocumentController implements Initializable {
 
         packetTimeLCD = LcdBuilder.create()
                 .title("Mission Time")
-                .styleClass(Lcd.STYLE_CLASS_FLAT_MIDNIGHT_BLUE)
-                .decimals(3)
+                .styleClass(Lcd.STYLE_CLASS_GREEN_DARKGREEN)
+                .decimals(1)
                 .unit("s")
                 .backgroundVisible(true)
                 .maxMeasuredValueDecimals(3)
@@ -714,11 +707,9 @@ public class FXMLDocumentController implements Initializable {
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .maxValue(10000)
-
                 .minValue(0)
-
                 .build();
-        bottomRightTopRightGrid.add(packetTimeLCD, 0, 0);
+        topRightTopRightGrid.add(packetTimeLCD, 0, 1);
 
 
         force3LCD = LcdBuilder.create()
@@ -757,22 +748,7 @@ public class FXMLDocumentController implements Initializable {
                 .build();
         bottomRightTopLeftGrid.add(force4LCD, 1, 1);
 
-        airSpeedLCD = LcdBuilder.create()
-                .title("Airspeed")
-                .styleClass(Lcd.STYLE_CLASS_FLAT_POMEGRANATE)
-                .decimals(3)
-                .backgroundVisible(true)
-                .value(0.0)
-                .unit("m/s")
-                .maxMeasuredValueDecimals(3)
-                .minValue(0)
-                .maxValue(99)
-                .foregroundShadowVisible(true)
-                .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
-                .animated(false)
-                .build();
-        bottomRightTopRightGrid.add(airSpeedLCD, 1, 0);
+
 
 
         GPSSpeedLCD = LcdBuilder.create()
@@ -850,21 +826,28 @@ public class FXMLDocumentController implements Initializable {
     }
 
     public void updateUI() throws Exception {
+
+        AltitudeLCD.setValue(tele.Altitude);
+        TeamIDLCD.setValue(tele.TeamID);
+        PacketCountLCD.setValue(tele.PacketCount);
+        packetTimeLCD.setValue(tele.logTime / 1000.0);
+        PressureLCD.setValue(tele.Pressure);
+
+
+
+
         pitchLCD.setValue(tele.pitch);
         horizon.setPitch(Double.parseDouble(String.valueOf(tele.pitch)));
         horizon.setRoll(Double.parseDouble(String.valueOf(tele.roll)));
         rollLCD.setValue(tele.roll);
-        compass.setValue(tele.heading);
+
         altimeter.setValue(tele.pAlt);
         altLCD.setValue(tele.pAlt);
         altLCD2.setValue(tele.GPSAlt);
         altimeter2.setValue(tele.GPSAlt);
         gSpeed.setValue(tele.GPSSpeed);
-        headingLCD.setValue(tele.heading);
         GPSSpeedLCD.setValue(tele.GPSSpeed);
-        airSpeedLCD.setValue(tele.airSpeed);
         GPSSats.setValue(tele.GPSSats);
-        airSpeed.setValue(tele.airSpeed);
         aof.setValue(tele.alfa);
         aofLCD.setValue(tele.alfa);
         sideSlipLCD.setValue(tele.betha);
@@ -892,8 +875,7 @@ public class FXMLDocumentController implements Initializable {
         linAcc2LCD.setValue(tele.ay / 9.8);
         linAcc3LCD.setValue(tele.az / 9.8);
         angVelLCD1.setValue(tele.gx * rad2deg);
-        angVelLCD2.setValue(tele.gy * rad2deg);
-        angVelLCD3.setValue(tele.gz * rad2deg);
+
 
         force1LCD.setValue(tele.GPSAlt);
         force2LCD.setValue(tele.GPSSats);
@@ -901,7 +883,6 @@ public class FXMLDocumentController implements Initializable {
         force4LCD.setValue(tele.GPSLat);
 //
 //
-        packetTimeLCD.setValue(tele.logTime / 1000.0);
         temprature.setValue(tele.temprature);
 //if (tele.logTime % 5000 ==0) r.gc();
 //realCompass.setBearing(tele.heading);
