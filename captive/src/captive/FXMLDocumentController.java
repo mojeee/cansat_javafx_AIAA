@@ -316,10 +316,10 @@ public class FXMLDocumentController implements Initializable {
 //realCompass = new AirCompass();
 //realCompass.setAnimated(false);
         // Horizon Creation
-        horizon = new Horizon();
+ /*       horizon = new Horizon();
         //horizon.setAnimated(false);
         topRightTopLeftGrid.add(horizon, 0, 0);
-        //rollLCD
+     */   //rollLCD
         rollLCD = LcdBuilder.create()
                 .title("Roll")
                 .styleClass(Lcd.STYLE_CLASS_GREEN_DARKGREEN)
@@ -408,7 +408,7 @@ public class FXMLDocumentController implements Initializable {
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .build();
-        topRightBottomLeftGrid.add(sideSlipLCD, 0, 1);
+        topRightBottomRightGrid.add(sideSlipLCD, 0, 1);
 
         //Altimeter
 /*        altimeter = new Altimeter();
@@ -451,34 +451,7 @@ public class FXMLDocumentController implements Initializable {
       //  topLeftBottomRightGrid.add(altLCD2, 0, 2);
 
 
-        //compass
-        compass = GaugeBuilder.create()
-                .minValue(0)
-                .maxValue(359)
-                .startAngle(180)
-                .angleRange(360)
-                //  .autoScale(false)
-                //.titleColor(Color.BLUE)
-                .customTickLabelsEnabled(true)
-                .customTickLabels("N", "NE", "E", "SE", "S", "SW", "W", "NW", "N")
-                .customTickLabelFontSize(35)
-                .minorTickMarksVisible(true)
-                .mediumTickMarksVisible(true)
-                .majorTickMarksVisible(false)
-                //.valueVisible(true)
-                .needleType(Gauge.NeedleType.AVIONIC)
-                .needleShape(Gauge.NeedleShape.ROUND)
-                .knobType(Gauge.KnobType.METAL)
-                .knobColor(Gauge.DARK_COLOR)
-                .borderPaint(Gauge.DARK_COLOR)
-                .animated(false)
-                .animationDuration(500)
-                .needleBehavior(Gauge.NeedleBehavior.OPTIMIZED)
-                //      .foregroundBaseColor(Color.WHITE)
 
-                .build();
-        topRightTopLeftGrid.add(compass, 1, 0);
-        //topLeftGrid.add(realCompass, 0,1);
         //headingLCD
         headingLCD = LcdBuilder.create()
                 .title("Heading")
@@ -547,7 +520,7 @@ public class FXMLDocumentController implements Initializable {
                 .foregroundBaseColor(Color.BLACK)
                 .titleColor(Color.WHITE)
                 .build();
-       // topRightBottomLeftGrid.add(GPSSats, 0, 0);
+        //topRightBottomLeftGrid.add(GPSSats, 0, 0);
         //map
         TileBuilder tileBuilder = TileBuilder.create();
         tileBuilder.skinType(SkinType.MAP);
@@ -561,103 +534,6 @@ public class FXMLDocumentController implements Initializable {
         mainGrid.add(mapTile, 0, 1);
 
 
-        //alfa
-        aof = GaugeBuilder
-                .create()
-                .skinType(Gauge.SkinType.HORIZONTAL)
-                // Related to Title Text
-                .title("Angle of Attack") // Set the text for the title
-                .titleColor(Color.BLUE)
-                .needleType(Gauge.NeedleType.AVIONIC)
-                // Related to Sub Title Text
-                .unit("°") // Set the text for the unit
-                .minValue(-20) // Set the start value of the scale
-                .maxValue(+20) // Set the end value of the scale
-                .animationDuration(500) // Speed of the needle in milliseconds (10 - 10000 ms)
-                //    .foregroundBaseColor(Color.WHITE)
-
-                .build();
-
-       // bottomRightTopRightGrid.add(aof, 0, 0);
-
-        //betha
-        sideSlip = GaugeBuilder
-                .create()
-                .skinType(Gauge.SkinType.HORIZONTAL)
-                // Related to Title Text
-                .knobColor(Color.RED)
-                .titleColor(Color.BLUE)
-                .customTickLabelFontSize(12)
-                .title("spin rate") // Set the text for the title
-                .needleType(Gauge.NeedleType.AVIONIC)
-                // Related to Sub Title Text
-                .minSize(50,50)
-                .maxSize(400,100)
-                .unit("°") // Set the text for the unit
-                .minValue(0) // Set the start value of the scale
-                .maxValue(100000) // Set the end value of the scale
-                .animationDuration(500) // Speed of the needle in milliseconds (10 - 10000 ms)
-                //    .foregroundBaseColor(Color.WHITE)
-
-                .build();
-
-       topRightBottomLeftGrid.add(sideSlip, 0, 0);
-
-
-        elevator = GaugeBuilder
-                .create()
-                .skinType(Gauge.SkinType.HORIZONTAL)
-                // Related to Title Text
-                .knobColor(Color.RED)
-                .titleColor(Color.BLUE)
-                .customTickLabelFontSize(12)
-                .title("Elevator") // Set the text for the title
-                .needleType(Gauge.NeedleType.AVIONIC)
-                // Related to Sub Title Text
-                .minSize(50,50)
-                .maxSize(400,100)
-                .unit("°") // Set the text for the unit
-                .minValue(-15) // Set the start value of the scale
-                .maxValue(+15) // Set the end value of the scale
-                .animationDuration(500) // Speed of the needle in milliseconds (10 - 10000 ms)
-                //    .foregroundBaseColor(Color.WHITE)
-
-                .build();
-
-       // topRightBottomRightGrid.add(elevator, 0, 0);
-        /* //elevator
-        elevator = GaugeBuilder
-                .create()
-                .skinType(Gauge.SkinType.VERTICAL)
-                // Related to Title Text
-                .title("Elevator Angle") // Set the text for the title
-                .needleType(Gauge.NeedleType.AVIONIC)
-                // Related to Sub Title Text
-                .unit("°") // Set the text for the unit
-
-                // .foregroundBaseColor(Color.WHITE)
-                .minValue(-15) // Set the start value of the scale
-                .maxValue(+15) // Set the end value of the scale
-                .animationDuration(500) // Speed of the needle in milliseconds (10 - 10000 ms)
-                .build();
-        elevator.setValue(5);
-        topRightBottomRightGrid.add(elevator, 1, 0);
-       */ //aileron
-//  aileron = GaugeBuilder
-//   .create()
-//   .skinType(Gauge.SkinType.VERTICAL)
-//   // Related to Title Text  
-//   .title("Aileron Angle") // Set the text for the title  
-//   .needleType(Gauge.NeedleType.AVIONIC)
-//   // Related to Sub Title Text  
-//   //  .foregroundBaseColor(Color.WHITE)
-//
-//  .unit("°") // Set the text for the unit  
-//   .minValue(-15) // Set the start value of the scale  
-//   .maxValue(+15) // Set the end value of the scale  
-//   .animationDuration(500) // Speed of the needle in milliseconds (10 - 10000 ms)  
-//   .build();
-//  bottomRightTopRightGrid.add(aileron, 1, 0);
 
         //battery
         battery = GaugeBuilder
@@ -669,7 +545,7 @@ public class FXMLDocumentController implements Initializable {
                 .maxValue(100) // Set the end value of the scale
                 .animationDuration(500) // Speed of the needle in milliseconds (10 - 10000 ms)
                 .build();
-        topRightTopRightGrid.add(battery, 0, 0);
+        topRightTopRightGrid.add(battery, 1, 0);
 
         //temp
         temprature = GaugeBuilder
@@ -685,7 +561,7 @@ public class FXMLDocumentController implements Initializable {
 
                 .animationDuration(500) // Speed of the needle in milliseconds (10 - 10000 ms)
                 .build();
-        topRightBottomRightGrid.add(temprature, 0, 0);
+        topRightTopRightGrid.add(temprature, 1, 1);
 
         //linear Acc LCD
         linAcc1LCD = LcdBuilder.create()
