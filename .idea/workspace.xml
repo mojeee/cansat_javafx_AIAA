@@ -9,6 +9,8 @@
     <list default="true" id="d00e933e-b0c8-4297-ba0d-250282ba94a5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/captive/src/captive/FXMLDocumentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/captive/src/captive/FXMLDocumentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/captive/src/captive/Telemetry.java" beforeDir="false" afterPath="$PROJECT_DIR$/captive/src/captive/Telemetry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/captive/src/captive/horizon.css" beforeDir="false" afterPath="$PROJECT_DIR$/captive/src/captive/horizon.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/captive/src/captive/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/captive/src/captive/styles.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,7 +23,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/captive/src/captive/Captive.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
+            <state relative-caret-position="432">
               <caret line="31" selection-start-line="31" selection-end-line="31" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -33,8 +35,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/captive/src/captive/PacketListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" selection-start-line="2" selection-end-line="2" />
+            <state relative-caret-position="328">
+              <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -45,8 +47,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/captive/src/captive/Telemetry.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="23" selection-start-line="23" selection-end-line="23" />
+            <state relative-caret-position="102">
+              <caret line="17" column="10" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -57,8 +59,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/captive/src/captive/FXMLDocumentController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131">
-              <caret line="843" column="44" lean-forward="true" selection-start-line="843" selection-start-column="44" selection-end-line="843" selection-end-column="44" />
+            <state relative-caret-position="51">
+              <caret line="833" column="50" selection-start-line="833" selection-start-column="50" selection-end-line="833" selection-end-column="50" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -93,8 +95,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/captive/src/captive/horizon.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="24" column="31" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
+            <state relative-caret-position="137">
+              <caret line="17" column="29" lean-forward="true" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -102,7 +104,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/captive/nbproject/jfx-impl.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16813">
+            <state relative-caret-position="328">
               <caret line="989" column="29" selection-start-line="989" selection-start-column="29" selection-end-line="989" selection-end-column="29" />
             </state>
           </provider>
@@ -111,8 +113,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/captive/src/captive/styles.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
+            <state relative-caret-position="102">
+              <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -121,36 +123,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ground speed</find>
-      <find>air speed</find>
-      <find>pitch</find>
-      <find>bottom</find>
-      <find>bot</find>
-      <find>roll</find>
-      <find>stat</find>
-      <find>toprighttop</find>
-      <find>se</find>
-      <find>SE</find>
-      <find>toprightbot</find>
-      <find>hel</find>
-      <find>bo</find>
-      <find>top</find>
-      <find>bott</find>
-      <find>spin</find>
-      <find>hea</find>
-      <find>Team</find>
-      <find>tim</find>
-      <find>angVelLCD2</find>
-      <find>gy</find>
-      <find>Pack</find>
-      <find>Tea</find>
-      <find>air</find>
-      <find>mis</find>
-      <find>bat</find>
-      <find>angVelLCD3</find>
-      <find>gz</find>
       <find>altitu</find>
       <find>alt</find>
+      <find>alti</find>
+      <find>AltitudeLCD</find>
+      <find>Alti</find>
+      <find>tem</find>
+      <find>colo</find>
+      <find>bat</find>
+      <find>volta</find>
+      <find>Ground</find>
+      <find>GPSSpeedLCD</find>
+      <find>temprature</find>
+      <find>GPSTime</find>
+      <find>team</find>
+      <find>Gpst</find>
+      <find>miss</find>
+      <find>pack</find>
+      <find>lon</find>
+      <find>lati</find>
+      <find>force4LCD</find>
+      <find>GPSLatit</find>
+      <find>force3LCD</find>
+      <find>GPSAlt</find>
+      <find>GPS</find>
+      <find>gps</find>
+      <find>force1LCD</find>
+      <find>Al</find>
+      <find>sat</find>
+      <find>sta</find>
+      <find>force2LCD</find>
     </findStrings>
     <replaceStrings>
       <replace>\\</replace>
@@ -162,12 +164,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/captive/src/captive/horizon.css" />
         <option value="$PROJECT_DIR$/libraries/styles.css" />
-        <option value="$PROJECT_DIR$/captive/src/captive/styles.css" />
         <option value="$PROJECT_DIR$/captive/src/captive/FXMLDocument_1.fxml" />
         <option value="$PROJECT_DIR$/captive/src/captive/Captive.java" />
         <option value="$PROJECT_DIR$/captive/src/captive/FXMLDocument.fxml" />
+        <option value="$PROJECT_DIR$/captive/src/captive/horizon.css" />
+        <option value="$PROJECT_DIR$/captive/src/captive/styles.css" />
         <option value="$PROJECT_DIR$/captive/src/captive/Telemetry.java" />
         <option value="$PROJECT_DIR$/captive/src/captive/FXMLDocumentController.java" />
       </list>
@@ -290,8 +292,8 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6926829" visible="true" weight="0.25945538" />
-      <window_info id="Structure" order="1" sideWeight="0.30731708" side_tool="true" visible="true" weight="0.25945538" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6926829" visible="true" weight="0.24962178" />
+      <window_info id="Structure" order="1" sideWeight="0.30731708" side_tool="true" visible="true" weight="0.24962178" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
@@ -362,27 +364,6 @@
     <entry file="file://$PROJECT_DIR$/captive/src/captive/icon.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/captive/src/captive/horizon.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="31" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/captive/nbproject/jfx-impl.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16813">
-          <caret line="989" column="29" selection-start-line="989" selection-start-column="29" selection-end-line="989" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/captive/src/captive/styles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/captive/src/captive/FXMLDocument.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
@@ -403,20 +384,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/captive/src/captive/Captive.java">
+    <entry file="file://$PROJECT_DIR$/captive/src/captive/styles.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="31" selection-start-line="31" selection-end-line="31" />
+        <state relative-caret-position="102">
+          <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/captive/nbproject/jfx-impl.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="989" column="29" selection-start-line="989" selection-start-column="29" selection-end-line="989" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/captive/src/captive/horizon.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="17" column="29" lean-forward="true" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/captive/src/captive/PacketListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/captive/src/captive/PacketListener.java">
+    <entry file="file://$PROJECT_DIR$/captive/src/captive/Captive.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        <state relative-caret-position="432">
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -425,8 +427,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/captive/src/captive/Telemetry.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        <state relative-caret-position="102">
+          <caret line="17" column="10" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -435,8 +437,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/captive/src/captive/FXMLDocumentController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="843" column="44" lean-forward="true" selection-start-line="843" selection-start-column="44" selection-end-line="843" selection-end-column="44" />
+        <state relative-caret-position="51">
+          <caret line="833" column="50" selection-start-line="833" selection-start-column="50" selection-end-line="833" selection-end-column="50" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

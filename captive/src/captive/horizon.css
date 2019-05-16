@@ -16,7 +16,7 @@
 
 .horizon {
     -outer-frame-color: gray;
-    -frame-color      : radial-gradient(center 50% 50%, radius 50%, black 0%, black 90%, #454547 94%, gray 95%, #454547 100%);
+    -frame-color             : radial-gradient(center 50% 50%, radius 50%, black 0%, black 90%, #454547 94%, gray 95%, #454547 100%);
     -background-color : radial-gradient(center 50% 50%, radius 50%, #999999 0%, #333333 90%);
     -frame-width      : 10;
 }

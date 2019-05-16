@@ -10,6 +10,15 @@ public class Telemetry {
     public float Altitude;
     public int PacketCount;
     public int Pressure;
+    public int temperature;
+    public int voltage;
+    public int GPSTime;
+    public int GPSLatitude;
+    public int GPSLongitude;
+    public float GPSALtitude;
+
+
+
 
 
 
@@ -32,8 +41,7 @@ public class Telemetry {
   public int lc2;
   public int lc3;
   public int lc4;
-  public int temprature;
- public int voltage;
+
   public int GPSSats;
   public double GPSLat;
   public double GPSLong;
@@ -54,6 +62,15 @@ public void parseString(){
         PacketCount = Integer.parseInt(values[i++]);
         Altitude = Float.parseFloat(values[i++]);
         Pressure = Integer.parseInt(values[i++]);
+        temperature = Integer.parseInt(values[i++]);
+        voltage = Integer.parseInt(values[i++]);
+        GPSTime = Integer.parseInt(values[i++]);
+        GPSLatitude=Integer.parseInt(values[i++]);
+        GPSLongitude=Integer.parseInt(values[i++]);
+        GPSALtitude=Float.parseFloat(values[i++]);
+
+
+
 
 
 
@@ -77,8 +94,6 @@ lc1 = Integer.parseInt(values[i++]);
 lc2 = Integer.parseInt(values[i++]);
 lc3 = Integer.parseInt(values[i++]);
 lc4 = Integer.parseInt(values[i++]);
-temprature = Integer.parseInt(values[i++]);
-voltage = (Integer.parseInt(values[i++]));
 GPSSats = Integer.parseInt(values[i++]);
 GPSLat = Double.parseDouble(values[i++]);
 GPSLong = Double.parseDouble(values[i++]);

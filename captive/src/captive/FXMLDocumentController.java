@@ -8,6 +8,7 @@ package captive;
 
 import eu.hansolo.enzo.lcd.Lcd;
 import eu.hansolo.enzo.lcd.LcdBuilder;
+import eu.hansolo.enzo.lcd.LcdClock;
 import eu.hansolo.medusa.Gauge;
 import eu.hansolo.medusa.GaugeBuilder;
 import eu.hansolo.medusa.Section;
@@ -43,6 +44,7 @@ import java.util.logging.Logger;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.paint.Paint;
 
 /**
  * @author Mojtaba Amini
@@ -80,6 +82,25 @@ public class FXMLDocumentController implements Initializable {
     private GridPane bottomRightBottomRightGrid;
     double rad2deg = 57.295;
 
+    private Lcd GPSTimeLCD = null;
+    private Lcd AltitudeLCD = null;
+    private Lcd PacketCountLCD = null;
+    private Lcd PressureLCD = null;
+    private Lcd TeamIDLCD = null;
+    public long zeroTime = 0;
+    public long packetTime = 0;
+    public Lcd packetTimeLCD = null;
+    private Gauge temperature = null;
+    private Lcd GPSLongitudeLCD = null;
+    private Lcd GPSAltitudeLCD = null;
+    private Lcd GPSSatsLCD = null;
+
+
+
+
+
+
+
     private Horizon horizon = null;
     //private AirCompass realCompass = null;
     private Lcd rollLCD = null;
@@ -93,30 +114,21 @@ public class FXMLDocumentController implements Initializable {
     private Lcd linAcc2LCD = null;
     private Lcd linAcc3LCD = null;
     private Lcd angVelLCD1 = null;
-    private Lcd PacketCountLCD = null;
-    private Lcd PressureLCD = null;
-    private Lcd TeamIDLCD = null;
-    private Lcd force1LCD = null;
-    private Lcd force2LCD = null;
-    private Lcd force3LCD = null;
-    private Lcd force4LCD = null;
-    private Lcd GPSSpeedLCD = null;
-    private Lcd AltitudeLCD = null;
+
+
+    private Lcd GPSLatitudeLCD = null;
+
     private Altimeter altimeter = null;
     private Altimeter altimeter2 = null;
     private Gauge compass = null;
     private Gauge gSpeed = null;
-    private Gauge GPSSats = null;
     private Gauge aof = null;
     private Gauge battery = null;
     private Gauge elevator = null;
     private Gauge sideSlip = null;
     // private Gauge aileron=null;
-    private Gauge temprature = null;
     private Tile mapTile = null;
-    public long zeroTime = 0;
-    public long packetTime = 0;
-    public Lcd packetTimeLCD = null;
+
     Runtime r;
     // XYChart.Series < Number, Number > axSeries;
 // XYChart.Series < Number, Number > aySeries;
@@ -498,26 +510,7 @@ public class FXMLDocumentController implements Initializable {
 */
 
         //GPSSats
-        GPSSats = GaugeBuilder
-                .create()
-                .skinType(Gauge.SkinType.SIMPLE)
-                .sections(new Section(0, 3.1, "1", Color.web("#11632f")),
-                        new Section(3.2, 5.1, "2", Color.web("#36843d")),
-                        new Section(5.2, 6.1, "3", Color.web("#67a328")),
-                        new Section(6.2, 8.1, "4", Color.web("#80b940")),
-                        new Section(8.2, 12.1, "5", Color.web("#95c262")),
-                        new Section(12.2, 20, "6", Color.web("#badf8d")))
-                .title("GPS Stats")
-                .threshold(50)
-                .animated(false)
-                .maxValue(20)
-                .borderPaint(Color.GRAY)
-                .thresholdColor(Color.BLACK)
-                .valueColor(Color.WHITE)
-                .foregroundBaseColor(Color.BLACK)
-                .titleColor(Color.WHITE)
-                .build();
-        //topRightBottomLeftGrid.add(GPSSats, 0, 0);
+
         //map
         TileBuilder tileBuilder = TileBuilder.create();
         tileBuilder.skinType(SkinType.MAP);
@@ -536,7 +529,8 @@ public class FXMLDocumentController implements Initializable {
         battery = GaugeBuilder
                 .create()
                 .skinType(Gauge.SkinType.BATTERY)
-                .barBackgroundColor(Color.GRAY)
+                .barBackgroundColor(Color.rgb(20,20,20))
+                .valueColor(Color.WHITE)
                 // Related to Title Text
                 .minValue(0) // Set the start value of the scale
                 .maxValue(100) // Set the end value of the scale
@@ -545,20 +539,22 @@ public class FXMLDocumentController implements Initializable {
         topRightBottomRightGrid.add(battery, 1, 0);
 
         //temp
-        temprature = GaugeBuilder
+
+        temperature = GaugeBuilder
                 .create()
                 .skinType(Gauge.SkinType.SLIM)
                 // Related to Title Text
                 .title("Temperature") // Set the text for the title
+                .foregroundBaseColor(Color.BLACK)
+                .barBackgroundColor(Color.BLACK)
                 // Related to Sub Title Text
                 .unit("C") // Set the text for the unit
                 .minValue(-20) // Set the start value of the scale
                 .maxValue(50) // Set the end value of the scale
                 .value(40)
-
                 .animationDuration(500) // Speed of the needle in milliseconds (10 - 10000 ms)
                 .build();
-        topRightBottomRightGrid.add(temprature, 1, 1);
+        topRightBottomRightGrid.add(temperature, 1, 1);
 
         //linear Acc LCD
         linAcc1LCD = LcdBuilder.create()
@@ -661,7 +657,7 @@ public class FXMLDocumentController implements Initializable {
 
 
         //force LCD
-        force1LCD = LcdBuilder.create()
+        GPSAltitudeLCD = LcdBuilder.create()
                 .title("GPS Altitude")
                 .unit("m")
                 .styleClass(Lcd.STYLE_CLASS_FLAT_GREEN_SEA)
@@ -675,10 +671,10 @@ public class FXMLDocumentController implements Initializable {
                 .maxValue(100000)
                 .minValue(-100000)
                 .build();
-        bottomRightTopLeftGrid.add(force1LCD, 0, 0);
+        bottomRightTopLeftGrid.add(GPSAltitudeLCD, 0, 0);
 
-        force2LCD = LcdBuilder.create()
-                .title("Gps Stats")
+        GPSSatsLCD = LcdBuilder.create()
+                .title("Gps Sats")
                 .styleClass(Lcd.STYLE_CLASS_FLAT_GREEN_SEA)
                 .decimals(0)
                 .backgroundVisible(true)
@@ -693,7 +689,7 @@ public class FXMLDocumentController implements Initializable {
                 .minValue(-100000)
 
                 .build();
-        bottomRightTopLeftGrid.add(force2LCD, 1, 0);
+        bottomRightTopLeftGrid.add(GPSSatsLCD, 1, 0);
 
         packetTimeLCD = LcdBuilder.create()
                 .title("Mission Time")
@@ -712,7 +708,7 @@ public class FXMLDocumentController implements Initializable {
         topRightTopRightGrid.add(packetTimeLCD, 0, 1);
 
 
-        force3LCD = LcdBuilder.create()
+        GPSLongitudeLCD = LcdBuilder.create()
                 .title("GPS LONGITUDE")
                 .styleClass(Lcd.STYLE_CLASS_FLAT_GREEN_SEA)
                 .decimals(0)
@@ -728,15 +724,15 @@ public class FXMLDocumentController implements Initializable {
                 .minValue(-100000)
 
                 .build();
-        bottomRightTopLeftGrid.add(force3LCD, 0, 1);
+        bottomRightTopLeftGrid.add(GPSLongitudeLCD, 0, 1);
 
-        force4LCD = LcdBuilder.create()
+        GPSLatitudeLCD = LcdBuilder.create()
                 .title("GPS LATITUDE")
                 .styleClass(Lcd.STYLE_CLASS_FLAT_GREEN_SEA)
                 .decimals(0)
+
                 .backgroundVisible(true)
                 .maxMeasuredValueDecimals(0)
-
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
@@ -746,28 +742,27 @@ public class FXMLDocumentController implements Initializable {
                 .minValue(-100000)
 
                 .build();
-        bottomRightTopLeftGrid.add(force4LCD, 1, 1);
+        bottomRightTopLeftGrid.add(GPSLatitudeLCD, 1, 1);
 
 
 
 
-        GPSSpeedLCD = LcdBuilder.create()
-                .title("Ground Speed")
-                .styleClass(Lcd.STYLE_CLASS_FLAT_POMEGRANATE)
-                .decimals(3)
+        GPSTimeLCD = LcdBuilder.create()
+                .title("GPS Time (UTC)")
+                .styleClass(LcdClock.STYLE_CLASS_GREEN_DARKGREEN)
+
                 .backgroundVisible(true)
-                .value(0.0)
-                .unit("m/s")
+                .value(0)
+
                 .maxMeasuredValueDecimals(3)
                 .minValue(0)
-                .maxValue(99)
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
 //   .maxSize(100, 60)
                 .build();
-        bottomRightTopRightGrid.add(GPSSpeedLCD, 1,1);
+        topRightTopRightGrid.add(GPSTimeLCD, 1,1);
 
 
         //charts
@@ -827,11 +822,23 @@ public class FXMLDocumentController implements Initializable {
 
     public void updateUI() throws Exception {
 
-        AltitudeLCD.setValue(tele.Altitude);
-        TeamIDLCD.setValue(tele.TeamID);
-        PacketCountLCD.setValue(tele.PacketCount);
         packetTimeLCD.setValue(tele.logTime / 1000.0);
+        PacketCountLCD.setValue(tele.PacketCount);
+        TeamIDLCD.setValue(tele.TeamID);
         PressureLCD.setValue(tele.Pressure);
+        temperature.setValue(tele.temperature);
+        battery.setValue(tele.voltage);
+        GPSTimeLCD.setValue(tele.GPSTime);
+        GPSLatitudeLCD.setValue(tele.GPSLatitude);
+        GPSLongitudeLCD.setValue(tele.GPSLongitude);
+        GPSAltitudeLCD.setValue(tele.GPSALtitude);
+        GPSSatsLCD.setValue(tele.GPSSats);
+
+
+
+
+
+
 
 
 
@@ -846,8 +853,6 @@ public class FXMLDocumentController implements Initializable {
         altLCD2.setValue(tele.GPSAlt);
         altimeter2.setValue(tele.GPSAlt);
         gSpeed.setValue(tele.GPSSpeed);
-        GPSSpeedLCD.setValue(tele.GPSSpeed);
-        GPSSats.setValue(tele.GPSSats);
         aof.setValue(tele.alfa);
         aofLCD.setValue(tele.alfa);
         sideSlipLCD.setValue(tele.betha);
@@ -855,7 +860,6 @@ public class FXMLDocumentController implements Initializable {
         elevator.setValue(tele.elevator);
         elevatorLCD.setValue(tele.elevator);
 // aileron.setValue(tele.aileron);
-        battery.setValue(tele.voltage);
         mapTile.setCurrentLocation(new Location(tele.GPSLat, tele.GPSLong));
 //
 ////  //charts
@@ -877,13 +881,10 @@ public class FXMLDocumentController implements Initializable {
         angVelLCD1.setValue(tele.gx * rad2deg);
 
 
-        force1LCD.setValue(tele.GPSAlt);
-        force2LCD.setValue(tele.GPSSats);
-        force3LCD.setValue(tele.GPSLong);
-        force4LCD.setValue(tele.GPSLat);
+
 //
 //
-        temprature.setValue(tele.temprature);
+
 //if (tele.logTime % 5000 ==0) r.gc();
 //realCompass.setBearing(tele.heading);
 
