@@ -11,7 +11,7 @@ import eu.hansolo.enzo.lcd.LcdBuilder;
 import eu.hansolo.enzo.lcd.LcdClock;
 import eu.hansolo.medusa.Gauge;
 import eu.hansolo.medusa.GaugeBuilder;
-import eu.hansolo.medusa.Section;
+
 import eu.hansolo.tilesfx.Tile;
 import eu.hansolo.tilesfx.Tile.MapProvider;
 import eu.hansolo.tilesfx.Tile.SkinType;
@@ -19,13 +19,13 @@ import eu.hansolo.tilesfx.TileBuilder;
 import eu.hansolo.tilesfx.tools.Location;
 
 import java.net.URL;
-import java.util.Random;
+
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.CategoryAxis;
+
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
@@ -37,7 +37,6 @@ import javafx.scene.paint.Color;
 import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortDataListener;
 import com.fazecast.jSerialComm.SerialPortEvent;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -50,11 +49,10 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.paint.Paint;
+
 
 /**
  * @author Mojtaba Amini
@@ -67,25 +65,11 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private GridPane topLeftGrid;
     @FXML
-    private GridPane topLeftTopRightGrid;
-    @FXML
-    private GridPane topLeftBottomRightGrid;
-    @FXML
     private GridPane topRightGrid;
-    @FXML
-    private GridPane topRightTopLeftGrid;
     @FXML
     private GridPane topRightTopRightGrid;
     @FXML
-    private GridPane topRightBottomLeftGrid;
-    @FXML
-    private GridPane topRightBottomRightGrid;
-    @FXML
-    private GridPane bottomRightGrid;
-    @FXML
     private GridPane bottomRightTopLeftGrid;
-    @FXML
-    private GridPane bottomRightBottomLeftGrid;
     @FXML
     private GridPane bottomRightTopRightGrid;
     @FXML
@@ -105,64 +89,22 @@ public class FXMLDocumentController implements Initializable {
     private Lcd GPSAltitudeLCD = null;
     private Lcd GPSSatsLCD = null;
     private Lcd CameraDirectionLCD = null;
-
-
-
-
-
-
-    private Horizon horizon = null;
-    //private AirCompass realCompass = null;
     private Lcd rollLCD = null;
     private Lcd pitchLCD = null;
-    private Lcd altLCD = null;
-    private Lcd altLCD2 = null;
     private Lcd BladeSpinRateLCD = null;
-    private Lcd aofLCD = null;
-    private Lcd sideSlipLCD = null;
-    private Lcd linAcc1LCD = null;
-    private Lcd linAcc2LCD = null;
-    private Lcd linAcc3LCD = null;
-    private Lcd angVelLCD1 = null;
-
-
     private Lcd GPSLatitudeLCD = null;
-
-    private Altimeter altimeter = null;
-    private Altimeter altimeter2 = null;
-    private Gauge compass = null;
-    private Gauge gSpeed = null;
-    private Gauge aof = null;
     private Gauge battery = null;
-    private Gauge elevator = null;
-    private Gauge sideSlip = null;
-    // private Gauge aileron=null;
+
+
     private Tile mapTile = null;
 
     Runtime r;
-    // XYChart.Series < Number, Number > axSeries;
-// XYChart.Series < Number, Number > aySeries;
-// XYChart.Series < Number, Number > azSeries;
-// XYChart.Series < Number, Number > gxSeries;
-// XYChart.Series < Number, Number > gySeries;
-// XYChart.Series < Number, Number > gzSeries;
-// XYChart.Series < Number, Number > lc1Series;
-// XYChart.Series < Number, Number > lc2Series;
-// XYChart.Series < Number, Number > lc3Series;
-// XYChart.Series < Number, Number > lc4Series;
-// @FXML LineChart aSeriesChart;
-// @FXML LineChart gSeriesChart;
-// @FXML LineChart lcSeriesChart;
+
     @FXML
     private Button connectBtn;
     @FXML
     private Button disconnectBtn;
-    // @FXML private GridPane linAccVBox;
-// @FXML private GridPane angVelLCDBox;
-// @FXML private GridPane forceLCDBox;
-// @FXML private NumberAxis aSeriesX;
-// @FXML private NumberAxis gSeriesX;
-// @FXML private NumberAxis lcSeriesX;
+
     boolean updating = false;
     Telemetry tele = null;
     @FXML
@@ -214,16 +156,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void zeroTime() throws ConcurrentModificationException {
         zeroTime = System.currentTimeMillis();
-//      while(updating); lc1Series.getData().clear();
-//      while(updating);  lc2Series.getData().clear();
-//     while(updating); lc3Series.getData().clear();
-//     while(updating); lc4Series.getData().clear();
-//     while(updating); axSeries.getData().clear();
-//     while(updating);  aySeries.getData().clear();
-//     while(updating);  azSeries.getData().clear();
-//     while(updating); gxSeries.getData().clear();
-//     while(updating); gySeries.getData().clear();
-//     while(updating); gzSeries.getData().clear();
+
     }
 
     @FXML
@@ -334,13 +267,7 @@ public class FXMLDocumentController implements Initializable {
         tele = new Telemetry();
         r = Runtime.getRuntime();
 
-//realCompass = new AirCompass();
-//realCompass.setAnimated(false);
-        // Horizon Creation
- /*       horizon = new Horizon();
-        //horizon.setAnimated(false);
-        topRightTopLeftGrid.add(horizon, 0, 0);
-     */   //rollLCD
+        //rollLCD
         rollLCD = LcdBuilder.create()
                 .title("Roll")
                 .styleClass(Lcd.STYLE_CLASS_GREEN_DARKGREEN)
@@ -705,7 +632,7 @@ public class FXMLDocumentController implements Initializable {
                 series_roll.getData().add(new XYChart.Data<>(x, roll));
                 series_pitch.getData().add(new XYChart.Data<>(x, pitch));
             });
-        }, 0, 1, TimeUnit.SECONDS);
+        }, 0, 100, TimeUnit.MILLISECONDS);
         //  root.getChildren().addAll();
 
         topLeftGrid.add(lineChart_Angle, 1 , 0);
@@ -731,9 +658,7 @@ public class FXMLDocumentController implements Initializable {
         // add series to chart
         lineChart_BladeSpinRate.getData().add(series_BladeSpinRate);
         // setup scene
-//            Scene scene = new Scene(lineChart, 800, 600);
-        // this is used to display time in HH:mm:ss format
-        // final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ss");
+
 
         // setup a scheduled executor to periodically put data into the chart
         ScheduledExecutorService scheduledExecutorService_BladeSpinRate;
@@ -752,8 +677,7 @@ public class FXMLDocumentController implements Initializable {
                 // put random number with current time
                 series_BladeSpinRate.getData().add(new XYChart.Data<>(x, y));
             });
-        }, 0, 1, TimeUnit.SECONDS);
-        //  root.getChildren().addAll();
+        }, 0, 100, TimeUnit.MILLISECONDS);
 
         topLeftGrid.add(lineChart_BladeSpinRate, 0 , 0);
 
@@ -761,68 +685,8 @@ public class FXMLDocumentController implements Initializable {
         ImageView imageView = new ImageView(image);
         imageView.setFitHeight(130);
         imageView.setFitWidth(130);
-       // imageView.setX(500);
-       // imageView.setY(500);
         bottomRightBottomRightGrid.add(imageView, 0 , 0 );
 
-
-
-
-
-
-        //charts
-
-//  axSeries = new XYChart.Series < Number, Number > ();
-//  aySeries = new XYChart.Series < Number, Number > ();
-//  azSeries = new XYChart.Series < Number, Number > ();
-//  axSeries.setName("a_x(m/s^2)");
-//  aySeries.setName("a_y(m/s^2)");
-//  azSeries.setName("a_z(m/s^2)");
-//  aSeriesChart.getData().add(axSeries);
-//  aSeriesChart.getData().add(aySeries);
-//  aSeriesChart.getData().add(azSeries);
-//  aSeriesChart.setCreateSymbols(false);
-//
-//  aSeriesChart.getStyleClass().add("thick-chart");
-//
-//
-//
-//  gxSeries = new XYChart.Series < Number, Number > ();
-//  gySeries = new XYChart.Series < Number, Number > ();
-//  gzSeries = new XYChart.Series < Number, Number > ();
-//  gxSeries.setName("p(Rad/s)");
-//  gySeries.setName("q(Rad/s)");
-//  gzSeries.setName("r(Rad/s)");
-//  gSeriesChart.getData().add(gxSeries);
-//  gSeriesChart.getData().add(gySeries);
-//  gSeriesChart.getData().add(gzSeries);
-//  gSeriesChart.setCreateSymbols(false);
-//  gSeriesChart.getStyleClass().add("thick-chart");
-//
-//
-//  lc1Series = new XYChart.Series < Number, Number > ();
-//  lc2Series = new XYChart.Series < Number, Number > ();
-//  lc3Series = new XYChart.Series < Number, Number > ();
-//  lc4Series = new XYChart.Series < Number, Number > ();
-//
-//  lc1Series.setName("Force 1(g)");
-//  lc2Series.setName("Force 2(g)");
-//  lc3Series.setName("Force 3(g)");
-//  lc4Series.setName("Force 4(g)");
-//  lcSeriesChart.getData().add(lc1Series);
-//  lcSeriesChart.getData().add(lc2Series);
-//  lcSeriesChart.getData().add(lc3Series);
-//  lcSeriesChart.getData().add(lc4Series);
-//  lcSeriesChart.setCreateSymbols(false);
-//  lcSeriesChart.getStyleClass().add("thick-chart");
-//
-//  //lcSeriesChart.setLegendVisible(true);
-//  aSeriesX.setForceZeroInRange(false);
-//  gSeriesX.setForceZeroInRange(false);
-//  lcSeriesX.setForceZeroInRange(false);
-//  //   aSeriesX.setAutoRanging(true);
-//  //  gSeriesX.setAutoRanging(true);
-//  // lcSeriesX.setAutoRanging(true);
     }
 
     public void updateUI() throws Exception {
@@ -844,54 +708,6 @@ public class FXMLDocumentController implements Initializable {
         mapTile.setCurrentLocation(new Location(tele.GPSLatitude, tele.GPSLongitude));
         CameraDirectionLCD.setValue(tele.CameraDirection);
         AltitudeLCD.setValue(tele.Altitude);
-
-
-
-
-
-
-
-/*
-        horizon.setPitch(Double.parseDouble(String.valueOf(tele.pitch)));
-        horizon.setRoll(Double.parseDouble(String.valueOf(tele.roll)));
-
-//        altimeter.setValue(tele.pAlt);
-//        altLCD.setValue(tele.pAlt);
-        altLCD2.setValue(tele.GPSAlt);
-        altimeter2.setValue(tele.GPSAlt);
-        gSpeed.setValue(tele.GPSSpeed);
-//*/        //aof.setValue(tele.alfa);
-//        aofLCD.setValue(tele.alfa);
-//        sideSlipLCD.setValue(tele.betha);
-  //      sideSlip.setValue(tele.betha);
-//        elevator.setValue(tele.elevator);
-// aileron.setValue(tele.aileron);
-//
-////  //charts
-////  axSeries.getData().add(new XYChart.Data < Number, Number > (tele.logTime / 1000.0, tele.ax));
-////  aySeries.getData().add(new XYChart.Data < Number, Number > (tele.logTime / 1000.0, tele.ay));
-////  azSeries.getData().add(new XYChart.Data < Number, Number > (tele.logTime / 1000.0, tele.az));
-////  gxSeries.getData().add(new XYChart.Data < Number, Number > (tele.logTime / 1000.0, tele.gx));
-////  gySeries.getData().add(new XYChart.Data < Number, Number > (tele.logTime / 1000.0, tele.gy));
-////  gzSeries.getData().add(new XYChart.Data < Number, Number > (tele.logTime / 1000.0, tele.gz));
-////  
-////  lc1Series.getData().add(new XYChart.Data < Number, Number > (tele.logTime / 1000.0, tele.lc1));
-////  lc2Series.getData().add(new XYChart.Data < Number, Number > (tele.logTime / 1000.0, tele.lc2));
-////  lc3Series.getData().add(new XYChart.Data < Number, Number > (tele.logTime / 1000.0, tele.lc3));
-////  lc4Series.getData().add(new XYChart.Data < Number, Number > (tele.logTime / 1000.0, tele.lc4));
-//  
- /*       linAcc1LCD.setValue(tele.ax / 9.8);
-        linAcc2LCD.setValue(tele.ay / 9.8);
-        linAcc3LCD.setValue(tele.az / 9.8);
-        angVelLCD1.setValue(tele.gx * rad2deg);
-*/
-
-
-//
-//
-
-//if (tele.logTime % 5000 ==0) r.gc();
-//realCompass.setBearing(tele.heading);
 
     }
 
