@@ -612,26 +612,26 @@ public class FXMLDocumentController implements Initializable {
                 .build();
         bottomRightTopRightGrid.add(GPSTimeLCD, 0,0);
 
-// first plot************************************************************************************
+// Altitude Plot************************************************************************************
         final NumberAxis xAxis_missionTime = new NumberAxis(); // we are gonna plot against time
-        final NumberAxis yAxis_Pressure = new NumberAxis();
+        final NumberAxis yAxis_Altitude = new NumberAxis();
         xAxis_missionTime.setLabel("Time(s)");
         xAxis_missionTime.setAnimated(false); // axis animations are removed
-        yAxis_Pressure.setLabel("Speed ( m/s )");
-        yAxis_Pressure.setAnimated(false); // axis animations are removed
+        yAxis_Altitude.setLabel("Altitude (m)");
+        yAxis_Altitude.setAnimated(false); // axis animations are removed
 
         //creating the line chart with two axis created above
-        final LineChart<Number, Number> lineChart_Pressure = new LineChart<>(xAxis_missionTime, yAxis_Pressure);
-        lineChart_Pressure.setTitle("Payload Speed Realtime Plot");
-        lineChart_Pressure.setAnimated(false); // disable animations
+        final LineChart<Number, Number> lineChart_Altitude = new LineChart<>(xAxis_missionTime, yAxis_Altitude);
+        lineChart_Altitude.setTitle("Altitude Realtime Plot");
+        lineChart_Altitude.setAnimated(false); // disable animations
         // show the stage
         //defining a series to display data
         XYChart.Series<Number, Number> series = new XYChart.Series<>();
         series.setName("Data Series");
-        lineChart_Pressure.setLegendVisible(false);
-        lineChart_Pressure.setCreateSymbols(false);
+        lineChart_Altitude.setLegendVisible(false);
+        lineChart_Altitude.setCreateSymbols(false);
         // add series to chart
-        lineChart_Pressure.getData().add(series);
+        lineChart_Altitude.getData().add(series);
         // setup scene
 //            Scene scene = new Scene(lineChart, 800, 600);
         // this is used to display time in HH:mm:ss format
@@ -644,8 +644,8 @@ public class FXMLDocumentController implements Initializable {
         // put dummy data onto graph per second
         scheduledExecutorService.scheduleAtFixedRate(() -> {
             // get a random integer between 0-10
-            double y =  Math.random();
-            double x =  Math.random();
+            double y =  tele.Altitude;
+            double x =  tele.missionTime;
 
             // Update the chart
             Platform.runLater(() -> {
@@ -657,101 +657,105 @@ public class FXMLDocumentController implements Initializable {
         }, 0, 100, TimeUnit.MILLISECONDS);
         //  root.getChildren().addAll();
 
-        topRightGrid.add(lineChart_Pressure, 0 , 0);
+        topRightGrid.add(lineChart_Altitude, 0 , 0);
 
-// second plot************************************************************************************
+// roll and pitch plot************************************************************************************
        final NumberAxis xAxis_missionTime2 = new NumberAxis(); // we are gonna plot against time
-        final NumberAxis yAxis_Temperature = new NumberAxis();
+        final NumberAxis yAxis_Angle = new NumberAxis();
         xAxis_missionTime2.setLabel("Time(s)");
         xAxis_missionTime2.setAnimated(false); // axis animations are removed
-        yAxis_Temperature.setLabel("Speed ( m/s )");
-        yAxis_Temperature.setAnimated(false); // axis animations are removed
-
+        yAxis_Angle.setLabel("(deg/s)");
+        yAxis_Angle.setAnimated(false); // axis animations are removed
         //creating the line chart with two axis created above
-        final LineChart<Number, Number> lineChart_Temperature = new LineChart<>(xAxis_missionTime2, yAxis_Temperature);
-        lineChart_Temperature.setTitle("Payload Speed Realtime Plot");
-        lineChart_Temperature.setAnimated(false); // disable animations
+        final LineChart<Number, Number> lineChart_Angle = new LineChart<>(xAxis_missionTime2, yAxis_Angle);
+        lineChart_Angle.setTitle("Roll & Pitch Realtime Plot");
+        lineChart_Angle.setAnimated(false); // disable animations
         // show the stage
         //defining a series to display data
-        XYChart.Series<Number, Number> series_Temperature = new XYChart.Series<>();
-        series.setName("Data Series");
-        lineChart_Temperature.setLegendVisible(false);
-        lineChart_Temperature.setCreateSymbols(false);
+        XYChart.Series<Number, Number> series_roll = new XYChart.Series<>();
+        series_roll.setName("Roll");
+        XYChart.Series<Number, Number> series_pitch = new XYChart.Series<>();
+        series_pitch.setName("Pitch");
+        lineChart_Angle.setLegendVisible(true);
+        lineChart_Angle.setCreateSymbols(false);
         // add series to chart
-        lineChart_Temperature.getData().add(series_Temperature);
+        lineChart_Angle.getData().add(series_roll);
+        lineChart_Angle.getData().add(series_pitch);
         // setup scene
 //            Scene scene = new Scene(lineChart, 800, 600);
         // this is used to display time in HH:mm:ss format
         // final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ss");
 
         // setup a scheduled executor to periodically put data into the chart
-        ScheduledExecutorService scheduledExecutorService_Temperature;
-        scheduledExecutorService_Temperature = Executors.newSingleThreadScheduledExecutor();
+        ScheduledExecutorService scheduledExecutorService_Angle;
+        scheduledExecutorService_Angle = Executors.newSingleThreadScheduledExecutor();
 
         // put dummy data onto graph per second
-        scheduledExecutorService_Temperature.scheduleAtFixedRate(() -> {
+        scheduledExecutorService_Angle.scheduleAtFixedRate(() -> {
             // get a random integer between 0-10
-            double y =  Math.random();
-            double x =  Math.random();
+            double roll =  tele.roll;
+            double pitch =  tele.pitch;
+            double x =  tele.missionTime;
 
             // Update the chart
             Platform.runLater(() -> {
                 // get current time
                 // Date now = new Date();
                 // put random number with current time
-                series_Temperature.getData().add(new XYChart.Data<>(x, y));
+                series_roll.getData().add(new XYChart.Data<>(x, roll));
+                series_pitch.getData().add(new XYChart.Data<>(x, pitch));
             });
-        }, 0, 10, TimeUnit.SECONDS);
+        }, 0, 1, TimeUnit.SECONDS);
         //  root.getChildren().addAll();
 
-        topLeftGrid.add(lineChart_Temperature, 1 , 0);
+        topLeftGrid.add(lineChart_Angle, 1 , 0);
 
         // Third plot************************************************************************************
         final NumberAxis xAxis_missionTime3 = new NumberAxis(); // we are gonna plot against time
-        final NumberAxis yAxis_Altitude = new NumberAxis();
+        final NumberAxis yAxis_BladeSpinRate = new NumberAxis();
         xAxis_missionTime3.setLabel("Time(s)");
         xAxis_missionTime3.setAnimated(false); // axis animations are removed
-        yAxis_Altitude.setLabel("Speed ( m/s )");
-        yAxis_Altitude.setAnimated(false); // axis animations are removed
+        yAxis_BladeSpinRate.setLabel("Blade Spin Rate (RPM)");
+        yAxis_BladeSpinRate.setAnimated(false); // axis animations are removed
 
         //creating the line chart with two axis created above
-        final LineChart<Number, Number> lineChart_Altitude = new LineChart<>(xAxis_missionTime3, yAxis_Altitude);
-        lineChart_Altitude.setTitle("Payload Speed Realtime Plot");
-        lineChart_Altitude.setAnimated(false); // disable animations
+        final LineChart<Number, Number> lineChart_BladeSpinRate = new LineChart<>(xAxis_missionTime3, yAxis_BladeSpinRate);
+        lineChart_BladeSpinRate.setTitle("Blade Spin Rate Realtime Plot");
+        lineChart_BladeSpinRate.setAnimated(false); // disable animations
         // show the stage
         //defining a series to display data
-        XYChart.Series<Number, Number> series_Altitude = new XYChart.Series<>();
+        XYChart.Series<Number, Number> series_BladeSpinRate = new XYChart.Series<>();
         series.setName("Data Series");
-        lineChart_Altitude.setLegendVisible(false);
-        lineChart_Altitude.setCreateSymbols(false);
+        lineChart_BladeSpinRate.setLegendVisible(false);
+        lineChart_BladeSpinRate.setCreateSymbols(false);
         // add series to chart
-        lineChart_Altitude.getData().add(series_Altitude);
+        lineChart_BladeSpinRate.getData().add(series_BladeSpinRate);
         // setup scene
 //            Scene scene = new Scene(lineChart, 800, 600);
         // this is used to display time in HH:mm:ss format
         // final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ss");
 
         // setup a scheduled executor to periodically put data into the chart
-        ScheduledExecutorService scheduledExecutorService_Altitude;
-        scheduledExecutorService_Altitude = Executors.newSingleThreadScheduledExecutor();
+        ScheduledExecutorService scheduledExecutorService_BladeSpinRate;
+        scheduledExecutorService_BladeSpinRate = Executors.newSingleThreadScheduledExecutor();
 
         // put dummy data onto graph per second
-        scheduledExecutorService_Altitude.scheduleAtFixedRate(() -> {
+        scheduledExecutorService_BladeSpinRate.scheduleAtFixedRate(() -> {
             // get a random integer between 0-10
-            double y =  Math.random();
-            double x =  Math.random();
+            double y = tele.BladeSpinRate;
+            double x =  tele.missionTime;
 
             // Update the chart
             Platform.runLater(() -> {
                 // get current time
                 // Date now = new Date();
                 // put random number with current time
-                series_Altitude.getData().add(new XYChart.Data<>(x, y));
+                series_BladeSpinRate.getData().add(new XYChart.Data<>(x, y));
             });
-        }, 0, 10, TimeUnit.SECONDS);
+        }, 0, 1, TimeUnit.SECONDS);
         //  root.getChildren().addAll();
 
-        topLeftGrid.add(lineChart_Altitude, 0 , 0);
+        topLeftGrid.add(lineChart_BladeSpinRate, 0 , 0);
 
         Image image = new Image("captive/icon.jpg");
         ImageView imageView = new ImageView(image);
