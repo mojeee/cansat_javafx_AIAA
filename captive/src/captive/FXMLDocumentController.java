@@ -19,6 +19,7 @@ import eu.hansolo.tilesfx.TileBuilder;
 import eu.hansolo.tilesfx.tools.Location;
 
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
@@ -30,6 +31,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import com.fazecast.jSerialComm.SerialPort;
@@ -102,7 +104,7 @@ public class FXMLDocumentController implements Initializable {
     private Lcd GPSLongitudeLCD = null;
     private Lcd GPSAltitudeLCD = null;
     private Lcd GPSSatsLCD = null;
-
+    private Lcd CameraDirectionLCD = null;
 
 
 
@@ -373,6 +375,25 @@ public class FXMLDocumentController implements Initializable {
                 .animated(false)
                 .build();
         bottomRightTopRightGrid.add(pitchLCD, 1, 1);
+
+
+        //pitchLCD
+        CameraDirectionLCD = LcdBuilder.create()
+                .title("Camera Direction")
+                .styleClass(Lcd.STYLE_CLASS_GREEN_DARKGREEN)
+                .decimals(0)
+                .backgroundVisible(true)
+                .value(0)
+                .unit("deg")
+                .maxMeasuredValueDecimals(0)
+                .minValue(-180)
+                .maxValue(180)
+                .foregroundShadowVisible(true)
+                .crystalOverlayVisible(true)
+                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
+                .animated(false)
+                .build();
+        topRightTopRightGrid.add(CameraDirectionLCD, 1, 1);
 
 
         //elevator LCD
@@ -771,29 +792,29 @@ public class FXMLDocumentController implements Initializable {
         bottomRightTopRightGrid.add(GPSTimeLCD, 0,0);
 
 // first plot************************************************************************************
-        final CategoryAxis xAxis_speed = new CategoryAxis(); // we are gonna plot against time
-        final NumberAxis yAxis_speed = new NumberAxis();
-        xAxis_speed.setLabel("Time(s)");
-        xAxis_speed.setAnimated(false); // axis animations are removed
-        yAxis_speed.setLabel("Speed ( m/s )");
-        yAxis_speed.setAnimated(false); // axis animations are removed
+        final NumberAxis xAxis_missionTime = new NumberAxis(); // we are gonna plot against time
+        final NumberAxis yAxis_Pressure = new NumberAxis();
+        xAxis_missionTime.setLabel("Time(s)");
+        xAxis_missionTime.setAnimated(false); // axis animations are removed
+        yAxis_Pressure.setLabel("Speed ( m/s )");
+        yAxis_Pressure.setAnimated(false); // axis animations are removed
 
         //creating the line chart with two axis created above
-        final LineChart<String, Number> lineChart_speed = new LineChart<>(xAxis_speed, yAxis_speed);
-        lineChart_speed.setTitle("Payload Speed Realtime Plot");
-        lineChart_speed.setAnimated(false); // disable animations
+        final LineChart<Number, Number> lineChart_Pressure = new LineChart<>(xAxis_missionTime, yAxis_Pressure);
+        lineChart_Pressure.setTitle("Payload Speed Realtime Plot");
+        lineChart_Pressure.setAnimated(false); // disable animations
         // show the stage
         //defining a series to display data
-        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        XYChart.Series<Number, Number> series = new XYChart.Series<>();
         series.setName("Data Series");
-        lineChart_speed.setLegendVisible(false);
-        lineChart_speed.setCreateSymbols(false);
+        lineChart_Pressure.setLegendVisible(false);
+        lineChart_Pressure.setCreateSymbols(false);
         // add series to chart
-        lineChart_speed.getData().add(series);
+        lineChart_Pressure.getData().add(series);
         // setup scene
 //            Scene scene = new Scene(lineChart, 800, 600);
         // this is used to display time in HH:mm:ss format
-        final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ss");
+       // final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ss");
 
         // setup a scheduled executor to periodically put data into the chart
         ScheduledExecutorService scheduledExecutorService;
@@ -802,19 +823,122 @@ public class FXMLDocumentController implements Initializable {
         // put dummy data onto graph per second
         scheduledExecutorService.scheduleAtFixedRate(() -> {
             // get a random integer between 0-10
-            Integer random = 5;
+            double y =  Math.random();
+            double x =  Math.random();
 
             // Update the chart
             Platform.runLater(() -> {
                 // get current time
-                Date now = new Date();
+               // Date now = new Date();
                 // put random number with current time
-                series.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), random));
+                series.getData().add(new XYChart.Data<>(x, y));
             });
-        }, 0, 1, TimeUnit.SECONDS);
+        }, 0, 100, TimeUnit.MILLISECONDS);
         //  root.getChildren().addAll();
 
-        topRightGrid.add(lineChart_speed, 0 , 0);
+        topRightGrid.add(lineChart_Pressure, 0 , 0);
+
+// second plot************************************************************************************
+       final NumberAxis xAxis_missionTime2 = new NumberAxis(); // we are gonna plot against time
+        final NumberAxis yAxis_Temperature = new NumberAxis();
+        xAxis_missionTime2.setLabel("Time(s)");
+        xAxis_missionTime2.setAnimated(false); // axis animations are removed
+        yAxis_Temperature.setLabel("Speed ( m/s )");
+        yAxis_Temperature.setAnimated(false); // axis animations are removed
+
+        //creating the line chart with two axis created above
+        final LineChart<Number, Number> lineChart_Temperature = new LineChart<>(xAxis_missionTime2, yAxis_Temperature);
+        lineChart_Temperature.setTitle("Payload Speed Realtime Plot");
+        lineChart_Temperature.setAnimated(false); // disable animations
+        // show the stage
+        //defining a series to display data
+        XYChart.Series<Number, Number> series_Temperature = new XYChart.Series<>();
+        series.setName("Data Series");
+        lineChart_Temperature.setLegendVisible(false);
+        lineChart_Temperature.setCreateSymbols(false);
+        // add series to chart
+        lineChart_Temperature.getData().add(series_Temperature);
+        // setup scene
+//            Scene scene = new Scene(lineChart, 800, 600);
+        // this is used to display time in HH:mm:ss format
+        // final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ss");
+
+        // setup a scheduled executor to periodically put data into the chart
+        ScheduledExecutorService scheduledExecutorService_Temperature;
+        scheduledExecutorService_Temperature = Executors.newSingleThreadScheduledExecutor();
+
+        // put dummy data onto graph per second
+        scheduledExecutorService_Temperature.scheduleAtFixedRate(() -> {
+            // get a random integer between 0-10
+            double y =  Math.random();
+            double x =  Math.random();
+
+            // Update the chart
+            Platform.runLater(() -> {
+                // get current time
+                // Date now = new Date();
+                // put random number with current time
+                series_Temperature.getData().add(new XYChart.Data<>(x, y));
+            });
+        }, 0, 10, TimeUnit.SECONDS);
+        //  root.getChildren().addAll();
+
+        topLeftGrid.add(lineChart_Temperature, 1 , 0);
+
+        // Third plot************************************************************************************
+        final NumberAxis xAxis_missionTime3 = new NumberAxis(); // we are gonna plot against time
+        final NumberAxis yAxis_Altitude = new NumberAxis();
+        xAxis_missionTime3.setLabel("Time(s)");
+        xAxis_missionTime3.setAnimated(false); // axis animations are removed
+        yAxis_Altitude.setLabel("Speed ( m/s )");
+        yAxis_Altitude.setAnimated(false); // axis animations are removed
+
+        //creating the line chart with two axis created above
+        final LineChart<Number, Number> lineChart_Altitude = new LineChart<>(xAxis_missionTime3, yAxis_Altitude);
+        lineChart_Altitude.setTitle("Payload Speed Realtime Plot");
+        lineChart_Altitude.setAnimated(false); // disable animations
+        // show the stage
+        //defining a series to display data
+        XYChart.Series<Number, Number> series_Altitude = new XYChart.Series<>();
+        series.setName("Data Series");
+        lineChart_Altitude.setLegendVisible(false);
+        lineChart_Altitude.setCreateSymbols(false);
+        // add series to chart
+        lineChart_Altitude.getData().add(series_Altitude);
+        // setup scene
+//            Scene scene = new Scene(lineChart, 800, 600);
+        // this is used to display time in HH:mm:ss format
+        // final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ss");
+
+        // setup a scheduled executor to periodically put data into the chart
+        ScheduledExecutorService scheduledExecutorService_Altitude;
+        scheduledExecutorService_Altitude = Executors.newSingleThreadScheduledExecutor();
+
+        // put dummy data onto graph per second
+        scheduledExecutorService_Altitude.scheduleAtFixedRate(() -> {
+            // get a random integer between 0-10
+            double y =  Math.random();
+            double x =  Math.random();
+
+            // Update the chart
+            Platform.runLater(() -> {
+                // get current time
+                // Date now = new Date();
+                // put random number with current time
+                series_Altitude.getData().add(new XYChart.Data<>(x, y));
+            });
+        }, 0, 10, TimeUnit.SECONDS);
+        //  root.getChildren().addAll();
+
+        topLeftGrid.add(lineChart_Altitude, 0 , 0);
+
+        Image image = new Image("captive/icon.jpg");
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(130);
+        imageView.setFitWidth(130);
+       // imageView.setX(500);
+       // imageView.setY(500);
+        bottomRightBottomRightGrid.add(imageView, 0 , 0 );
 
 
 
@@ -878,7 +1002,7 @@ public class FXMLDocumentController implements Initializable {
 
     public void updateUI() throws Exception {
 
-        packetTimeLCD.setValue(tele.logTime / 1000.0);
+        packetTimeLCD.setValue(tele.missionTime);
         PacketCountLCD.setValue(tele.PacketCount);
         TeamIDLCD.setValue(tele.TeamID);
         PressureLCD.setValue(tele.Pressure);
@@ -892,6 +1016,8 @@ public class FXMLDocumentController implements Initializable {
         pitchLCD.setValue(tele.pitch);
         rollLCD.setValue(tele.roll);
         BladeSpinRateLCD.setValue(tele.BladeSpinRate);
+        mapTile.setCurrentLocation(new Location(tele.GPSLatitude, tele.GPSLongitude));
+        CameraDirectionLCD.setValue(tele.CameraDirection);
 
 
 
@@ -900,23 +1026,21 @@ public class FXMLDocumentController implements Initializable {
 
 
 
-
-
+/*
         horizon.setPitch(Double.parseDouble(String.valueOf(tele.pitch)));
         horizon.setRoll(Double.parseDouble(String.valueOf(tele.roll)));
 
-        altimeter.setValue(tele.pAlt);
-        altLCD.setValue(tele.pAlt);
+//        altimeter.setValue(tele.pAlt);
+//        altLCD.setValue(tele.pAlt);
         altLCD2.setValue(tele.GPSAlt);
         altimeter2.setValue(tele.GPSAlt);
         gSpeed.setValue(tele.GPSSpeed);
-        aof.setValue(tele.alfa);
-        aofLCD.setValue(tele.alfa);
-        sideSlipLCD.setValue(tele.betha);
-        sideSlip.setValue(tele.betha);
-        elevator.setValue(tele.elevator);
+//*/        //aof.setValue(tele.alfa);
+//        aofLCD.setValue(tele.alfa);
+//        sideSlipLCD.setValue(tele.betha);
+  //      sideSlip.setValue(tele.betha);
+//        elevator.setValue(tele.elevator);
 // aileron.setValue(tele.aileron);
-        mapTile.setCurrentLocation(new Location(tele.GPSLat, tele.GPSLong));
 //
 ////  //charts
 ////  axSeries.getData().add(new XYChart.Data < Number, Number > (tele.logTime / 1000.0, tele.ax));
@@ -931,11 +1055,11 @@ public class FXMLDocumentController implements Initializable {
 ////  lc3Series.getData().add(new XYChart.Data < Number, Number > (tele.logTime / 1000.0, tele.lc3));
 ////  lc4Series.getData().add(new XYChart.Data < Number, Number > (tele.logTime / 1000.0, tele.lc4));
 //  
-        linAcc1LCD.setValue(tele.ax / 9.8);
+ /*       linAcc1LCD.setValue(tele.ax / 9.8);
         linAcc2LCD.setValue(tele.ay / 9.8);
         linAcc3LCD.setValue(tele.az / 9.8);
         angVelLCD1.setValue(tele.gx * rad2deg);
-
+*/
 
 
 //
