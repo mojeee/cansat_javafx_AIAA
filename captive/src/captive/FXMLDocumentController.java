@@ -230,7 +230,7 @@ public class FXMLDocumentController implements Initializable {
     private void ConnectCom() throws Exception {
         int selectedIndex = comList.getSelectionModel().getSelectedIndex();
         Selected = comPort[selectedIndex];
-        Selected.setBaudRate(38400);
+        Selected.setBaudRate(2400);
         if (!Selected.openPort()) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Connection Failed!Please retry...", ButtonType.CLOSE);
             alert.show();
@@ -403,10 +403,10 @@ public class FXMLDocumentController implements Initializable {
                 .decimals(0)
                 .backgroundVisible(true)
                 .value(0)
-                .unit("rad/s")
+                .unit("RPM")
                 .maxMeasuredValueDecimals(0)
-                .minValue(-50)
-                .maxValue(+50)
+                .minValue(0)
+                .maxValue(+500000)
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
@@ -414,55 +414,15 @@ public class FXMLDocumentController implements Initializable {
                 .build();
         bottomRightTopRightGrid.add(BladeSpinRateLCD, 0, 1);
 
-        //aof LCD
-        aofLCD = LcdBuilder.create()
-                .title("Angle of Attack")
-                .styleClass(Lcd.STYLE_CLASS_FLAT_BELIZE_HOLE)
-                .decimals(0)
-                .unit("deg")
-                .backgroundVisible(true)
-                .value(0)
-                .maxMeasuredValueDecimals(0)
-                .minValue(-20)
-                .maxValue(+20)
-                .foregroundShadowVisible(true)
-                .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
-                .animated(false)
-                .build();
-       // bottomRightTopRightGrid.add(aofLCD, 0, 1);
-
-        //sideSlip LCD
-       /* BladeSpinRateLCD = LcdBuilder.create()
-                .title("Blade Spin rate")
-                .styleClass(Lcd.STYLE_CLASS_FLAT_BELIZE_HOLE)
-                .decimals(0)
-                .backgroundVisible(true)
-                .value(0)
-                .unit("rad/s")
-                .maxMeasuredValueDecimals(0)
-                .minValue(-90)
-                .maxValue(+90)
-                .foregroundShadowVisible(true)
-                .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
-                .animated(false)
-                .build();
-        topRightTopRightGrid.add(BladeSpinRateLCD, 0, 3);
-*/
-        //Altimeter
-/*        altimeter = new Altimeter();
-        topLeftBottomRightGrid.add(altimeter, 0, 0);
-*/        //altLCD
         AltitudeLCD = LcdBuilder.create()
                 .title("Altitude")
                 .styleClass(Lcd.STYLE_CLASS_YELLOW_BLACK)
-                .decimals(0)
+                .decimals(1)
                 .unit("m")
                 .backgroundVisible(true)
                 .value(0)
                 .maxMeasuredValueDecimals(0)
-                .maxValue(10000)
+                .maxValue(100000)
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
@@ -470,29 +430,7 @@ public class FXMLDocumentController implements Initializable {
                 .build();
         topRightTopRightGrid.add(AltitudeLCD, 0, 2);
 
-        //Altimeter
-   /*     altimeter2 = new Altimeter();
-        topLeftBottomRightGrid.add(altimeter2, 1, 0);
-  */      //altLCD2
-        altLCD2 = LcdBuilder.create()
-                .title("GPS Altitude")
-                .styleClass(Lcd.STYLE_CLASS_BLACK_YELLOW)
-                .decimals(0)
-                .unit("m")
-                .backgroundVisible(true)
-                .value(0)
-                .maxMeasuredValueDecimals(0)
-                .maxValue(10000)
-                .foregroundShadowVisible(true)
-                .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
-                .animated(false)
-                .build();
-      //  topLeftBottomRightGrid.add(altLCD2, 0, 2);
 
-
-
-        //headingLCD
         TeamIDLCD = LcdBuilder.create()
                 .title("Team ID")
                 .styleClass(Lcd.STYLE_CLASS_GREEN_DARKGREEN)
@@ -500,7 +438,7 @@ public class FXMLDocumentController implements Initializable {
                 .backgroundVisible(true)
                 .value(0)
                 .maxMeasuredValueDecimals(0)
-                .maxValue(2000)
+                .maxValue(20000)
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
@@ -508,37 +446,6 @@ public class FXMLDocumentController implements Initializable {
                 .build();
         topRightTopRightGrid.add(TeamIDLCD, 0, 0);
 
-        //Ground Speed
-  /*      gSpeed = GaugeBuilder
-                .create()
-                .skinType(Gauge.SkinType.MODERN)
-                // Related to Title Text
-                .title("Ground Speed") // Set the text for the title
-                .unit("m/s") // Set the text for the unit
-                .minValue(0.0) // Set the start value of the scale
-                .decimals(1)
-                .maxValue(80) // Set the end value of the scale
-                .animationDuration(500) // Speed of the needle in milliseconds (10 - 10000 ms)
-                .build();
-        topRightTopLeftGrid.add(gSpeed, 1, 0);
-*/
-        //AirSpeed
-  /*      airSpeed = GaugeBuilder
-                .create()
-                .skinType(Gauge.SkinType.MODERN)
-                // Related to Title Text
-                .title("Air Speed") // Set the text for the title
-                // Related to Sub Title Text
-                .unit("m/s") // Set the text for the unit
-                .minValue(0.0) // Set the start value of the scale
-                .decimals(1)
-                .maxValue(80) // Set the end value of the scale
-                .animationDuration(500) // Speed of the needle in milliseconds (10 - 10000 ms)
-                .build();
-        topRightTopLeftGrid.add(airSpeed, 0, 0);
-*/
-
-        //GPSSats
 
         //map
         TileBuilder tileBuilder = TileBuilder.create();
@@ -551,8 +458,6 @@ public class FXMLDocumentController implements Initializable {
         tileBuilder.smoothing(true);
         mapTile = tileBuilder.build();
         mainGrid.add(mapTile, 0, 1);
-
-
 
         //battery
         battery = GaugeBuilder
@@ -585,81 +490,12 @@ public class FXMLDocumentController implements Initializable {
                 .build();
         topRightTopRightGrid.add(temperature, 1, 3);
 
-        //linear Acc LCD
-        linAcc1LCD = LcdBuilder.create()
-                .title("a_X")
-                .styleClass(Lcd.STYLE_CLASS_YELLOW_BLACK)
-                .decimals(3)
-                .unit("g")
-                .backgroundVisible(true)
-                .value(0.0)
-                .maxMeasuredValueDecimals(3)
-                .minValue(-20)
-                .maxValue(20)
-                .foregroundShadowVisible(false)
-                .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
-                .animated(false)
-                .build();
-       // topRightBottomLeftGrid.add(linAcc1LCD, 0, 0);
-        //linear Acc LCD
-        linAcc2LCD = LcdBuilder.create()
-                .title("a_Y")
-                .styleClass(Lcd.STYLE_CLASS_YELLOW_BLACK)
-                .decimals(3)
-                .backgroundVisible(true)
-                .value(0.0)
-                .unit("g")
-                .maxMeasuredValueDecimals(3)
-                .minValue(-20)
-                .maxValue(20)
-                .foregroundShadowVisible(true)
-                .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
-                .animated(false)
-                .build();
-      //  topRightBottomLeftGrid.add(linAcc2LCD, 0, 1);
-        linAcc3LCD = LcdBuilder.create()
-                .title("a_Z")
-                .styleClass(Lcd.STYLE_CLASS_YELLOW_BLACK)
-                .decimals(3)
-                .unit("g")
-                .backgroundVisible(true)
-                .value(0.0)
-                .maxMeasuredValueDecimals(3)
-                .minValue(-20)
-                .maxValue(20)
-                .foregroundShadowVisible(true)
-                .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
-                .animated(false)
-                .build();
-       // topRightBottomLeftGrid.add(linAcc3LCD, 0, 2);
-
-        //gyro lcd
-        angVelLCD1 = LcdBuilder.create()
-                .title("p")
-                .unit("Deg/s")
-                .styleClass(Lcd.STYLE_CLASS_YELLOW_BLACK)
-                .decimals(3)
-                .backgroundVisible(true)
-                .value(0)
-                .maxMeasuredValueDecimals(3)
-                .minValue(-200)
-                .maxValue(200)
-                .foregroundShadowVisible(true)
-                .crystalOverlayVisible(true)
-                .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
-                .animated(false)
-                .build();
-      //  topRightBottomLeftGrid.add(angVelLCD1, 1, 0);
-
         PacketCountLCD = LcdBuilder.create()
                 .title("Packet Count")
                 .styleClass(Lcd.STYLE_CLASS_GREEN_DARKGREEN)
                 .backgroundVisible(true)
                 .value(00)
-                .maxValue(1000)
+                .maxValue(1000000)
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
@@ -675,8 +511,8 @@ public class FXMLDocumentController implements Initializable {
                 .backgroundVisible(true)
                 .value(00)
                 .maxMeasuredValueDecimals(3)
-                .minValue(-200)
-                .maxValue(200)
+                .minValue(0)
+                .maxValue(10000000)
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
@@ -684,21 +520,19 @@ public class FXMLDocumentController implements Initializable {
                 .build();
         topRightTopRightGrid.add(PressureLCD, 0, 3);
 
-
-        //force LCD
         GPSAltitudeLCD = LcdBuilder.create()
                 .title("GPS Altitude")
                 .unit("m")
                 .styleClass(Lcd.STYLE_CLASS_FLAT_GREEN_SEA)
-                .decimals(0)
+                .decimals(1)
                 .backgroundVisible(true)
                 .maxMeasuredValueDecimals(0)
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
-                .maxValue(100000)
-                .minValue(-100000)
+                .maxValue(10000000)
+                .minValue(0)
                 .build();
         bottomRightTopLeftGrid.add(GPSAltitudeLCD, 0, 0);
 
@@ -708,22 +542,19 @@ public class FXMLDocumentController implements Initializable {
                 .decimals(0)
                 .backgroundVisible(true)
                 .maxMeasuredValueDecimals(0)
-
                 .foregroundShadowVisible(true)
                 .crystalOverlayVisible(true)
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .maxValue(100000)
-
-                .minValue(-100000)
-
+                .minValue(0)
                 .build();
         bottomRightTopLeftGrid.add(GPSSatsLCD, 1, 0);
 
         packetTimeLCD = LcdBuilder.create()
                 .title("Mission Time")
                 .styleClass(Lcd.STYLE_CLASS_GREEN_DARKGREEN)
-                .decimals(1)
+                .decimals(0)
                 .unit("s")
                 .backgroundVisible(true)
                 .maxMeasuredValueDecimals(3)
@@ -731,7 +562,7 @@ public class FXMLDocumentController implements Initializable {
                 .crystalOverlayVisible(true)
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
-                .maxValue(10000)
+                .maxValue(1000000000)
                 .minValue(0)
                 .build();
         topRightTopRightGrid.add(packetTimeLCD, 0, 1);
@@ -740,8 +571,7 @@ public class FXMLDocumentController implements Initializable {
         GPSLongitudeLCD = LcdBuilder.create()
                 .title("GPS LONGITUDE")
                 .styleClass(Lcd.STYLE_CLASS_FLAT_GREEN_SEA)
-                .decimals(0)
-
+                .decimals(6)
                 .backgroundVisible(true)
                 .maxMeasuredValueDecimals(0)
                 .foregroundShadowVisible(true)
@@ -749,17 +579,14 @@ public class FXMLDocumentController implements Initializable {
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .maxValue(100000)
-
                 .minValue(-100000)
-
                 .build();
         bottomRightTopLeftGrid.add(GPSLongitudeLCD, 0, 1);
 
         GPSLatitudeLCD = LcdBuilder.create()
                 .title("GPS LATITUDE")
                 .styleClass(Lcd.STYLE_CLASS_FLAT_GREEN_SEA)
-                .decimals(0)
-
+                .decimals(6)
                 .backgroundVisible(true)
                 .maxMeasuredValueDecimals(0)
                 .foregroundShadowVisible(true)
@@ -767,14 +594,9 @@ public class FXMLDocumentController implements Initializable {
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
                 .maxValue(100000)
-
                 .minValue(-100000)
-
                 .build();
         bottomRightTopLeftGrid.add(GPSLatitudeLCD, 1, 1);
-
-
-
 
         GPSTimeLCD = LcdBuilder.create()
                 .title("GPS Time (UTC)")
@@ -787,7 +609,6 @@ public class FXMLDocumentController implements Initializable {
                 .crystalOverlayVisible(true)
                 .valueFont(Lcd.LcdFont.DIGITAL_BOLD)
                 .animated(false)
-//   .maxSize(100, 60)
                 .build();
         bottomRightTopRightGrid.add(GPSTimeLCD, 0,0);
 
@@ -1018,7 +839,7 @@ public class FXMLDocumentController implements Initializable {
         BladeSpinRateLCD.setValue(tele.BladeSpinRate);
         mapTile.setCurrentLocation(new Location(tele.GPSLatitude, tele.GPSLongitude));
         CameraDirectionLCD.setValue(tele.CameraDirection);
-
+        AltitudeLCD.setValue(tele.Altitude);
 
 
 

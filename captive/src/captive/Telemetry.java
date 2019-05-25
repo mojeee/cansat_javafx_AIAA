@@ -9,12 +9,12 @@ public class Telemetry {
     public int missionTime;
     public float Altitude;
     public int PacketCount;
-    public int Pressure;
-    public int temperature;
-    public int voltage;
-    public int GPSTime;
-    public int GPSLatitude;
-    public int GPSLongitude;
+    public float Pressure;
+    public float temperature;
+    public float voltage;
+    public long GPSTime;
+    public double GPSLatitude;
+    public double GPSLongitude;
     public float GPSAltitude;
     public int pitch;
     public int roll;
@@ -56,25 +56,25 @@ public void initString(String s){
 }
 public void parseString(){
     String[] values = payloadString.split(",");
-    int i =0;
+    int i =1;
         checkSumStart = Integer.parseInt(values[i++]);
         TeamID = Integer.parseInt(values[i++]);
         missionTime = Integer.parseInt(values[i++]);
         PacketCount = Integer.parseInt(values[i++]);
         Altitude = Float.parseFloat(values[i++]);
-        Pressure = Integer.parseInt(values[i++]);
-        temperature = Integer.parseInt(values[i++]);
-        voltage = Integer.parseInt(values[i++]);
-        GPSTime = Integer.parseInt(values[i++]);
-        GPSLatitude=Integer.parseInt(values[i++]);
-        GPSLongitude=Integer.parseInt(values[i++]);
+        Pressure = Float.parseFloat(values[i++]);
+        temperature = Float.parseFloat(values[i++]);
+        voltage = Float.parseFloat(values[i++]);
+        GPSTime = Long.parseLong(values[i++]);
+        GPSLatitude=Double.parseDouble(values[i++]);
+        GPSLongitude=Double.parseDouble(values[i++]);
         GPSAltitude=Float.parseFloat(values[i++]);
         pitch = Integer.parseInt(values[i++]);
         roll = Integer.parseInt(values[i++]);
         BladeSpinRate= Integer.parseInt(values[i++]);
         GPSSats = Integer.parseInt(values[i++]);
         CameraDirection = Integer.parseInt(values[i++]);
-
+        checkSumEnd = Integer.parseInt(values[i++]);
 
 
 
@@ -100,7 +100,7 @@ GPSLat = Double.parseDouble(values[i++]);
 GPSLong = Double.parseDouble(values[i++]);
 GPSAlt = Float.parseFloat(values[i++]);
 GPSSpeed = Float.parseFloat(values[i++]);
-*/checkSumEnd = Integer.parseInt(values[i++]);
+*/
 }
 public boolean checkSumCheck(String temp){
     if (temp.startsWith("201,")&& temp.substring(0, temp.length()-1).endsWith(",254") && findRepeats(temp,',') == 17){
