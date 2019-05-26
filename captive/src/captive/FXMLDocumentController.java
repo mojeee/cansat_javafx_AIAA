@@ -5,27 +5,21 @@
  */
 package captive;
 
-
 import eu.hansolo.enzo.lcd.Lcd;
 import eu.hansolo.enzo.lcd.LcdBuilder;
 import eu.hansolo.enzo.lcd.LcdClock;
 import eu.hansolo.medusa.Gauge;
 import eu.hansolo.medusa.GaugeBuilder;
-
 import eu.hansolo.tilesfx.Tile;
 import eu.hansolo.tilesfx.Tile.MapProvider;
 import eu.hansolo.tilesfx.Tile.SkinType;
 import eu.hansolo.tilesfx.TileBuilder;
 import eu.hansolo.tilesfx.tools.Location;
-
 import java.net.URL;
-
 import java.util.ResourceBundle;
-
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
@@ -94,26 +88,20 @@ public class FXMLDocumentController implements Initializable {
     private Lcd BladeSpinRateLCD = null;
     private Lcd GPSLatitudeLCD = null;
     private Gauge battery = null;
-
-
     private Tile mapTile = null;
-
     Runtime r;
 
     @FXML
     private Button connectBtn;
     @FXML
     private Button disconnectBtn;
-
     boolean updating = false;
     Telemetry tele = null;
     @FXML
     private Button recordCSVBtn;
-
-
     boolean exportCSV = false;
     String CSVName = null;
-    //@FXML private TextArea logText;
+
     //Scanner scanner;
     @FXML
     private ChoiceBox comList;

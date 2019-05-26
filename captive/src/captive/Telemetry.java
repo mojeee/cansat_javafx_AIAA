@@ -1,7 +1,5 @@
 package captive;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class Telemetry {
     public int checkSumStart=201;
@@ -21,35 +19,8 @@ public class Telemetry {
     public int BladeSpinRate;
     public int GPSSats;
     public int CameraDirection;
-
-
-
-
-  //public long logTime;
-
-
-
- /* public int  elevator;
-  public int  aileron;
-  public int  alfa;
-  public int  betha;
-  public int  standAngle;
-  public int pAlt;
- public float ax;
-  public float ay;
- public float az;
- public float gx;
-  public int lc1;
-  public int lc2;
-  public int lc3;
-  public int lc4;
-
-  public double GPSLat;
-  public double GPSLong;
-  public float GPSAlt;
-  public float GPSSpeed;
-*/  public int checkSumEnd=254;
-  public String payloadString;
+    public int checkSumEnd=254;
+    public String payloadString;
 
 public void initString(String s){
   payloadString =  new String(s.substring(0, s.length()-1));
@@ -77,30 +48,6 @@ public void parseString(){
         checkSumEnd = Integer.parseInt(values[i++]);
 
 
-
-//logTime = Integer.parseInt(values[i++]);
-
-
-//elevator = Integer.parseInt(values[i++]);
-//aileron = Integer.parseInt(values[i++]);
-//alfa = Integer.parseInt(values[i++]);
-//betha = Integer.parseInt(values[i++]);
-//standAngle = Integer.parseInt(values[i++]);
-//pAlt = Integer.parseInt(values[i++]);
-//ax = Float.parseFloat(values[i++]);
-//ay = Float.parseFloat(values[i++]);
-//az = Float.parseFloat(values[i++]);
-//gx = Float.parseFloat(values[i++]);
-/*
-lc1 = Integer.parseInt(values[i++]);
-lc2 = Integer.parseInt(values[i++]);
-lc3 = Integer.parseInt(values[i++]);
-lc4 = Integer.parseInt(values[i++]);
-GPSLat = Double.parseDouble(values[i++]);
-GPSLong = Double.parseDouble(values[i++]);
-GPSAlt = Float.parseFloat(values[i++]);
-GPSSpeed = Float.parseFloat(values[i++]);
-*/
 }
 public boolean checkSumCheck(String temp){
     if (temp.startsWith("201,")&& temp.substring(0, temp.length()-1).endsWith(",254") && findRepeats(temp,',') == 17){
