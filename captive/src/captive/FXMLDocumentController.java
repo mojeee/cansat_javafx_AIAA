@@ -126,7 +126,7 @@ public class FXMLDocumentController implements Initializable {
     void disconnectBtnClick() {
         Selected.removeDataListener();
         Selected.closePort();
-        // connectBtn.setVisible(true);
+        connectBtn.setVisible(true);
         disconnectBtn.setVisible(false);
 
     }
@@ -137,7 +137,7 @@ public class FXMLDocumentController implements Initializable {
         exportCSV = true;
         recordCSVBtn.setText("Recording...");
         recordCSVBtn.setDisable(true);
-        writeToCSV("checksumStart," + "TeamID," + "logTime," + "missionTime," + "roll," + "pitch," + "airSpeed," + "elevator," + "aileron," + "alfa," + "beta," + "standAngle," + "pressure," + "pressureAlt," + "ax," + "ay," + "az," + "p," + "q," + "r," + "lc1," + "lc2," + "lc3," + "lc4," + "temprature," + "voltage," + "GPSSats," + "GPSLat," + "GPSLong," + "GPSAlt," + "GPSSpeed," + "checksumEnd");
+        writeToCSV("checksumStart," + "unknown,"+"TeamID," + "missionTime," + "PacketCount," + "Altitude," + "Pressure," + "temperature," + "voltage," + "GPSTime," + "GPSLatitude," + "GPSLongitude," + "GPSAltitude," + "pitch," + "roll," + "BladeSpinRate," + "GPSSats," + "CameraDirection," + "checkSumEnd");
     }
 
 
